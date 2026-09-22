@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simone de Paula | Fisioterapia Pélvica em Campinas</title>
+<meta name="description" content="Fisioterapia especializada em saúde pélvica em Campinas: cuidados pré, peri e pós-parto, disfunções do assoalho pélvico, dor pélvica e mais.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:        #eebac0;
+    --rosa-deep:   #c97e88;
+    --rosa-soft:   #f8dde1;
+    --verde:       #a3ab9d;
+    --verde-deep:  #74806f;
+    --verde-soft:  #eceae5;
+    --cream:       #fdf8f6;
+    --white:       #ffffff;
+    --ink:         #241f1e;
+    --ink-soft:    #665c5a;
+    --line:        rgba(36,31,30,0.1);
+    --radius-lg:   32px;
+    --radius-md:   20px;
+    --radius-sm:   12px;
+    --shadow:      0 20px 50px -25px rgba(47,59,51,0.25);
+    --ff-display:  'Fraunces', serif;
+    --ff-body:     'Work Sans', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--ff-body);
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  h1,h2,h3,h4{font-family:var(--ff-display);font-weight:500;letter-spacing:-0.01em;color:var(--ink);}
+  .container{width:100%;max-width:1160px;margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--verde-deep);
+    font-weight:600;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .lead{color:var(--ink-soft);font-size:17px;max-width:56ch;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:15px;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{
+    background:var(--rosa-deep);
+    color:var(--white);
+    box-shadow:0 14px 30px -12px rgba(201,123,126,0.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(201,123,126,0.65);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:1.5px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--verde-deep);color:var(--verde-deep);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(251,246,242,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;max-width:1160px;margin:0 auto;
+  }
+  .logo{
+    font-family:var(--ff-display);
+    font-size:22px;
+    color:var(--ink);
+    display:flex;flex-direction:column;line-height:1.1;
+  }
+  .logo span{
+    font-family:var(--ff-body);
+    font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--verde-deep);font-weight:600;margin-top:2px;
+  }
+  .logo-full{flex-direction:row;align-items:center;gap:12px;}
+  .logo-img{width:44px;height:auto;flex-shrink:0;}
+  footer .logo-img{width:40px;}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .2s;}
+  .nav-links a:hover{color:var(--rosa-deep);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;width:26px;z-index:110;}
+  .hamburger span{height:2px;width:100%;background:var(--ink);border-radius:2px;transition:.3s;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:170px 0 120px;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-blob{
+    position:absolute;top:-160px;right:-160px;
+    width:640px;height:640px;
+    background:radial-gradient(circle at 30% 30%, var(--rosa-soft), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+  }
+  .hero-blob-2{
+    position:absolute;bottom:-220px;left:-200px;
+    width:520px;height:520px;
+    background:radial-gradient(circle at 60% 40%, var(--verde-soft), transparent 70%);
+    border-radius:50%;
+    z-index:0;
+  }
+  .hero-inner{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(36px,4.6vw,58px);
+    line-height:1.08;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--rosa-deep);
+  }
+  .hero .lead{margin-bottom:36px;font-size:18px;}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
+  .hero-trust{
+    display:flex;gap:28px;flex-wrap:wrap;
+    padding-top:28px;border-top:1px solid var(--line);
+  }
+  .hero-trust div{font-size:13.5px;color:var(--ink-soft);}
+  .hero-trust strong{
+    display:block;font-family:var(--ff-display);font-size:22px;color:var(--ink);font-weight:500;
+  }
+  .hero-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:var(--radius-lg);
+    background:linear-gradient(155deg, var(--rosa-soft), var(--verde-soft));
+    padding:14px;
+    box-shadow:var(--shadow);
+  }
+  .hero-photo{
+    width:100%;height:100%;object-fit:cover;object-position:center top;
+    border-radius:calc(var(--radius-lg) - 10px);
+    box-shadow:0 30px 60px -30px rgba(36,31,30,0.35);
+  }
+
+  /* soft wave divider */
+  .wave{display:block;width:100%;line-height:0;}
+  .wave svg{width:100%;height:80px;}
+
+  /* ---------- Sobre ---------- */
+  .sobre{background:var(--white);padding:100px 0;}
+  .sobre-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
+  .sobre-card{
+    background:linear-gradient(160deg,var(--verde-soft),var(--white));
+    border-radius:var(--radius-lg);
+    padding:44px;
+    box-shadow:var(--shadow);
+  }
+  .sobre-card h3{font-size:26px;margin-bottom:6px;}
+  .sobre-card p.role{color:var(--rosa-deep);font-weight:600;font-size:14px;margin-bottom:20px;}
+  .sobre h2{font-size:clamp(28px,3.2vw,38px);margin-bottom:22px;}
+  .sobre .lead{margin-bottom:18px;}
+  .pill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .pill{
+    padding:8px 16px;border-radius:100px;
+    background:var(--rosa-soft);color:var(--rosa-deep);
+    font-size:13px;font-weight:600;
+  }
+  .pill.green{background:var(--verde-soft);color:var(--verde-deep);}
+
+  /* ---------- Serviços ---------- */
+  .servicos{padding:110px 0;}
+  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
+  .servicos-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  }
+  .service-card{
+    background:var(--white);
+    border-radius:var(--radius-md);
+    padding:30px 26px;
+    border:1px solid var(--line);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+    border-color:transparent;
+  }
+  .service-icon{
+    width:48px;height:48px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .service-icon.rosa{background:var(--rosa-soft);}
+  .service-icon.verde{background:var(--verde-soft);}
+  .service-card h4{font-size:17px;margin-bottom:8px;font-weight:600;font-family:var(--ff-body);}
+  .service-card p{font-size:14px;color:var(--ink-soft);}
+
+  /* ---------- Jornada ---------- */
+  .jornada{background:var(--verde-soft);padding:110px 0;}
+  .jornada-track{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    position:relative;margin-top:20px;
+  }
+  .jornada-track::before{
+    content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;
+    background:repeating-linear-gradient(90deg, var(--verde-deep) 0 8px, transparent 8px 16px);
+    opacity:.5;
+  }
+  .jornada-step{padding:0 24px;position:relative;text-align:left;}
+  .jornada-num{
+    width:68px;height:68px;border-radius:50%;
+    background:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--ff-display);font-size:22px;color:var(--rosa-deep);
+    box-shadow:var(--shadow);margin-bottom:22px;position:relative;z-index:1;
+  }
+  .jornada-step h4{font-size:19px;margin-bottom:10px;}
+  .jornada-step p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- Diferenciais ---------- */
+  .diferenciais{padding:110px 0;}
+  .dif-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  .dif-item{text-align:center;padding:10px;}
+  .dif-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(150deg,var(--rosa-soft),var(--verde-soft));
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  }
+  .dif-item h4{font-size:16px;margin-bottom:8px;}
+  .dif-item p{font-size:13.5px;color:var(--ink-soft);}
+
+  /* ---------- Contato ---------- */
+  .contato{background:var(--white);padding:110px 0;}
+  .contato-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;}
+  .contato-info h2{font-size:clamp(28px,3.2vw,38px);margin-bottom:18px;}
+  .info-card{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:20px 0;border-bottom:1px solid var(--line);
+  }
+  .info-card:last-child{border-bottom:none;}
+  .info-icon{
+    width:42px;height:42px;border-radius:12px;flex-shrink:0;
+    background:var(--verde-soft);display:flex;align-items:center;justify-content:center;
+  }
+  .info-card h4{font-size:15px;margin-bottom:4px;font-family:var(--ff-body);font-weight:600;}
+  .info-card p{font-size:14px;color:var(--ink-soft);}
+  .info-card a:hover{color:var(--rosa-deep);}
+
+  .form-card{
+    background:var(--cream);
+    border-radius:var(--radius-lg);
+    padding:40px;
+    box-shadow:var(--shadow);
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:7px;
+  }
+  .field input,.field select,.field textarea{
+    width:100%;padding:13px 16px;border-radius:12px;
+    border:1.5px solid var(--line);background:var(--white);
+    font-family:inherit;font-size:14.5px;color:var(--ink);
+    transition:border-color .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--rosa-deep);
+  }
+  .field textarea{resize:vertical;min-height:100px;}
+  .form-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:var(--white);padding:56px 0 28px;}
+  .footer-grid{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  footer .logo{color:var(--white);}
+  footer .logo span{color:var(--rosa);}
+  .footer-links{display:flex;gap:40px;flex-wrap:wrap;}
+  .footer-links h5{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.5);margin-bottom:14px;font-weight:600;}
+  .footer-links a{display:block;font-size:14px;margin-bottom:10px;color:rgba(255,255,255,0.85);}
+  .footer-links a:hover{color:var(--rosa);}
+  .footer-bottom{
+    padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:12.5px;color:rgba(255,255,255,0.45);
+  }
+
+  /* ---------- WhatsApp float ---------- */
+  .wa-float{
+    position:fixed;bottom:26px;right:26px;z-index:200;
+    width:60px;height:60px;border-radius:50%;
+    background:#25D366;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 28px -8px rgba(37,211,102,0.6);
+    animation:pulse 2.6s infinite;
+  }
+  .wa-float:hover{transform:scale(1.06);}
+  @keyframes pulse{
+    0%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 0 rgba(37,211,102,0.5);}
+    70%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 14px rgba(37,211,102,0);}
+    100%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 0 rgba(37,211,102,0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .wa-float{animation:none;}
+    *{scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-visual{max-width:420px;margin:0 auto;order:-1;}
+    .sobre-grid{grid-template-columns:1fr;}
+    .servicos-grid{grid-template-columns:repeat(2,1fr);}
+    .jornada-track{grid-template-columns:1fr;gap:36px;}
+    .jornada-track::before{display:none;}
+    .dif-grid{grid-template-columns:repeat(2,1fr);}
+    .contato-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .nav-links,.nav-cta .btn-ghost{display:none;}
+    .hamburger{display:flex;}
+    .nav-cta.open-menu{
+      display:flex;position:fixed;top:0;right:0;bottom:0;width:78%;max-width:320px;
+      background:var(--white);flex-direction:column;align-items:flex-start;
+      padding:100px 30px 30px;gap:22px;box-shadow:-20px 0 40px rgba(0,0,0,0.1);
+    }
+    .nav-cta.open-menu .nav-links{display:flex;flex-direction:column;gap:22px;}
+    .nav-cta.open-menu .btn-ghost{display:inline-flex;}
+    .hero{padding:130px 0 80px;}
+    .form-row{grid-template-columns:1fr;}
+    .servicos-grid{grid-template-columns:1fr;}
+    .dif-grid{grid-template-columns:1fr;}
+    .footer-grid{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header">
+  <div class="nav">
+    <a href="#top" class="logo logo-full"><img src="assets/logo.png" alt="Simone Faku - Fisioterapia Pélvica" class="logo-img">Simone de Paula<span>Fisioterapia Pélvica</span></a>
+    <div class="nav-cta" id="navCta">
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#jornada">Jornada</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a href="#contato" class="btn btn-ghost">Agendar consulta</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-blob"></div>
+  <div class="hero-blob-2"></div>
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">Fisioterapia pélvica · Campinas</span>
+      <h1>Cuidado especializado para <em>cada fase</em> da saúde da mulher</h1>
+      <p class="lead">Atendimento humanizado em fisioterapia pélvica, com acompanhamento individualizado para gestação, pós-parto, dores pélvicas e bem-estar íntimo.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" id="heroWaBtn" href="#" target="_blank" rel="noopener">
+          Agendar pelo WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#servicos">Ver especialidades</a>
+      </div>
+      <div class="hero-trust">
+        <div><strong>8+</strong>áreas de atuação especializadas</div>
+        <div><strong>Individual</strong>atendimento particular e reservado</div>
+        <div><strong>Campinas</strong>ambiente acolhedor e privativo</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/photo.jpg" alt="Simone de Paula, fisioterapeuta especializada em saúde pélvica" class="hero-photo">
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z" fill="#fffdfb"/></svg>
+</div>
+
+<!-- ================= SOBRE ================= -->
+<section class="sobre" id="sobre">
+  <div class="container sobre-grid">
+    <div class="sobre-card">
+      <span class="eyebrow">Quem cuida de você</span>
+      <h3>Simone de Paula</h3>
+      <p class="role">Fisioterapeuta especializada em saúde pélvica</p>
+      <p style="font-size:14.5px;color:var(--ink-soft);">Um olhar clínico atento e uma escuta cuidadosa para cada etapa da vida da mulher — da gestação à maturidade — em um espaço pensado para o conforto e a privacidade de cada paciente.</p>
+    </div>
+    <div>
+      <span class="eyebrow">Sobre o atendimento</span>
+      <h2>Fisioterapia pélvica com escuta, técnica e respeito ao seu tempo</h2>
+      <p class="lead">O assoalho pélvico sustenta muito mais do que se vê: postura, continência, sexualidade e autoestima. O acompanhamento é construído para tratar a causa, não apenas o sintoma — com avaliação individualizada e plano terapêutico específico para o seu momento de vida.</p>
+      <div class="pill-list">
+        <span class="pill">Atendimento particular</span>
+        <span class="pill green">Ambiente reservado</span>
+        <span class="pill">Plano terapêutico individual</span>
+        <span class="pill green">Escuta acolhedora</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVIÇOS ================= -->
+<section class="servicos" id="servicos">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Especialidades</span>
+      <h2>Cuidados pensados para cada necessidade</h2>
+    </div>
+    <div class="servicos-grid" id="servicosGrid">
+      <!-- cards injected by JS from the SERVICES list below -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= JORNADA ================= -->
+<section class="jornada" id="jornada">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Jornada da maternidade</span>
+      <h2>Acompanhamento em cada fase da gestação</h2>
+      <p class="lead" style="margin:16px auto 0;">Um cuidado contínuo, do preparo para o parto à recuperação total do corpo.</p>
+    </div>
+    <div class="jornada-track">
+      <div class="jornada-step">
+        <div class="jornada-num">01</div>
+        <h4>Pré-parto</h4>
+        <p>Preparo do assoalho pélvico, orientações posturais e respiratórias para uma gestação mais confortável e um parto mais preparado.</p>
+      </div>
+      <div class="jornada-step">
+        <div class="jornada-num">02</div>
+        <h4>Peri-parto</h4>
+        <p>Suporte próximo ao momento do parto, com orientações práticas sobre posicionamento, respiração e manejo da dor.</p>
+      </div>
+      <div class="jornada-step">
+        <div class="jornada-num">03</div>
+        <h4>Pós-parto</h4>
+        <p>Reabilitação do assoalho pélvico, cuidados com cicatrizes, consultoria de amamentação e retorno gradual às atividades.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFERENCIAIS ================= -->
+<section class="diferenciais">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Por que escolher</span>
+      <h2>Um cuidado feito sob medida</h2>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-item">
+        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M12 21s-7-4.5-9.3-9C1.2 8.3 3 5 6.4 5 8.6 5 10.6 6.3 12 8c1.4-1.7 3.4-3 5.6-3 3.4 0 5.2 3.3 3.7 7-2.3 4.5-9.3 9-9.3 9z"/></svg></div>
+        <h4>Atendimento humanizado</h4>
+        <p>Escuta atenta e respeito ao ritmo de cada paciente.</p>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <h4>Avaliação individualizada</h4>
+        <p>Plano terapêutico construído para o seu momento e objetivo.</p>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></div>
+        <h4>Espaço privativo</h4>
+        <p>Ambiente reservado e confortável, pensado para o cuidado íntimo.</p>
+      </div>
+      <div class="dif-item">
+        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h4>Flexibilidade de horários</h4>
+        <p>Agendamento facilitado, direto pelo WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave" style="transform:rotate(180deg)">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z" fill="#e6ede2"/></svg>
+</div>
+
+<!-- ================= CONTATO ================= -->
+<section class="contato" id="contato">
+  <div class="container contato-grid">
+    <div class="contato-info">
+      <span class="eyebrow">Vamos conversar</span>
+      <h2>Agende sua avaliação</h2>
+      <p class="lead" style="margin-bottom:8px;">Preencha o formulário ou chame diretamente no WhatsApp — a resposta é rápida e o primeiro passo é só uma conversa.</p>
+
+      <div class="info-card">
+        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M20 15.5a2 2 0 01-2.2 2A18 18 0 013 5.2 2 2 0 015 3h3.5a1 1 0 011 .8l.7 3.3a1 1 0 01-.3 1L8 9.7a13 13 0 006 6l1.6-1.9a1 1 0 011-.3l3.3.7a1 1 0 01.8 1V15.5z"/></svg></div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p><a href="#" id="infoWaLink" target="_blank" rel="noopener">(19) 99125-5241</a></p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <div>
+          <h4>Atendimento</h4>
+          <p>Campinas, SP — endereço enviado no agendamento</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <div>
+          <h4>E-mail</h4>
+          <p><a href="mailto:simonefukufisio@gmail.com">simonefukufisio@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="#c97b7e" stroke="none"/></svg></div>
+        <div>
+          <h4>Instagram</h4>
+          <p><a href="https://instagram.com/simonefukufisio" target="_blank" rel="noopener">@simonefukufisio</a></p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div>
+          <h4>Horários</h4>
+          <p>Segunda a sexta, mediante agendamento prévio</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" required placeholder="Seu nome completo">
+          </div>
+          <div class="field">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="telefone" required placeholder="(19) 90000-0000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="assunto">Área de interesse</label>
+          <select id="assunto">
+            <option>Cuidados pré, peri e pós-parto</option>
+            <option>Consultoria de amamentação</option>
+            <option>Dores pélvicas e na relação sexual</option>
+            <option>Perda de urina e flatos vaginais</option>
+            <option>Pós-cirúrgico integrado</option>
+            <option>Drenagem linfática especializada</option>
+            <option>Laserterapia clínica</option>
+            <option>Tratamentos estéticos e estética íntima</option>
+            <option>Ainda não sei, quero conversar</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" placeholder="Conte um pouco sobre o que você procura..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Enviar pelo WhatsApp</button>
+        <p class="form-note">Ao enviar, você será direcionada ao WhatsApp com sua mensagem pronta para envio.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="logo logo-full"><img src="assets/logo.png" alt="Simone Faku - Fisioterapia Pélvica" class="logo-img">Simone de Paula<span>Fisioterapia Pélvica</span></a>
+        <p style="font-size:13.5px;color:rgba(255,255,255,0.6);max-width:36ch;margin-top:14px;">Cuidado especializado em saúde pélvica, do preparo para o parto à recuperação — em Campinas, SP.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>Navegação</h5>
+          <a href="#sobre">Sobre</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#jornada">Jornada</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div>
+          <h5>Contato</h5>
+          <a href="#" id="footerWaLink" target="_blank" rel="noopener">(19) 99125-5241</a>
+          <a href="mailto:simonefukufisio@gmail.com">simonefukufisio@gmail.com</a>
+          <a href="https://instagram.com/simonefukufisio" target="_blank" rel="noopener">@simonefukufisio</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Simone de Paula — Fisioterapia Pélvica</span>
+      <span>Campinas, SP</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+<a class="wa-float" id="floatWaBtn" href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5S9.4 7 9.2 6.5c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3 2.8 1.2 2.8.8 3.3.8.5 0 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 15 3 13.5 3 12 3 7 7 3 12 3s9 4 9 9-4 8.3-9 8.3z"/></svg>
+</a>
+
+<script>
+  // ---- Services data (single source of truth) ----
+  const SERVICES = [
+    {t:"Cuidados pré, peri e pós-parto", d:"Preparo, suporte e recuperação em todas as fases da gestação.", i:"rosa"},
+    {t:"Consultoria de amamentação", d:"Orientação prática e acolhedora para uma amamentação mais tranquila.", i:"verde"},
+    {t:"Dores pélvicas e na relação sexual", d:"Avaliação e tratamento individualizado para dores pélvicas.", i:"rosa"},
+    {t:"Perda de urina e flatos vaginais", d:"Reabilitação do assoalho pélvico para recuperar controle e conforto.", i:"verde"},
+    {t:"Pós-cirúrgico integrado", d:"Acompanhamento na recuperação de cirurgias ginecológicas e obstétricas.", i:"rosa"},
+    {t:"Drenagem linfática especializada", d:"Técnicas específicas para redução de edemas e bem-estar corporal.", i:"verde"},
+    {t:"Laserterapia clínica", d:"Recurso terapêutico para cicatrização e alívio de desconfortos.", i:"rosa"},
+    {t:"Estética íntima", d:"Tratamentos estéticos voltados ao cuidado e à autoestima da mulher.", i:"verde"},
+  ];
+
+  const icons = {
+    rosa: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
+    verde:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>'
+  };
+
+  const grid = document.getElementById('servicosGrid');
+  SERVICES.forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `
+      <div class="service-icon ${s.i}">${icons[s.i]}</div>
+      <h4>${s.t}</h4>
+      <p>${s.d}</p>`;
+    grid.appendChild(card);
+  });
+
+  // ---- WhatsApp wiring ----
+  const WA_NUMBER = "5519991255241"; // 55 + DDD 19 + numero
+  const baseMsg = "Olá, Simone! Gostaria de agendar uma avaliação.";
+  const waBase = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(baseMsg)}`;
+  ['heroWaBtn','floatWaBtn','infoWaLink','footerWaLink'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.href = waBase;
+  });
+
+  // Contact form -> builds a custom WhatsApp message
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const assunto = document.getElementById('assunto').value;
+    const mensagem = document.getElementById('mensagem').value.trim();
+
+    let text = `Olá, Simone! Me chamo ${nome}.\nTelefone: ${telefone}\nÁrea de interesse: ${assunto}`;
+    if(mensagem) text += `\nMensagem: ${mensagem}`;
+
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  });
+
+  // ---- Header scroll state ----
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // ---- Mobile menu ----
+  const hamburger = document.getElementById('hamburger');
+  const navCta = document.getElementById('navCta');
+  hamburger.addEventListener('click', ()=>{
+    navCta.classList.toggle('open-menu');
+    hamburger.classList.toggle('active');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click', ()=> navCta.classList.remove('open-menu'));
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

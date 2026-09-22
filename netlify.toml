@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────
+#  Netlify configuration — fukufisio
+#  https://docs.netlify.com/configure-builds/file-based-configuration/
+# ─────────────────────────────────────────────
+
+[build]
+  publish = "."      # raiz do repo — sem build step, site estático puro
+
+# ── Cache agressivo para assets versionados (imagens, etc.)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ── Cache curto para o HTML (sempre busca versão nova)
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── Cabeçalhos de segurança globais
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options          = "SAMEORIGIN"
+    X-Content-Type-Options   = "nosniff"
+    Referrer-Policy          = "strict-origin-when-cross-origin"
+    Permissions-Policy       = "camera=(), microphone=(), geolocation=()"
+
+# ── Redirecionar www → apex (após conectar domínio customizado)
+# Descomente quando o domínio simonefukufisio.com.br estiver configurado:
+# [[redirects]]
+#   from  = "https://www.simonefukufisio.com.br/*"
+#   to    = "https://simonefukufisio.com.br/:splat"
+#   status = 301
+#   force  = true
