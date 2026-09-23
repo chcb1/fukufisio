@@ -5,6 +5,24 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.4.0] - 2026-09-23
+### Corrigido
+- Header reconstruído em layout 3-zone com CSS Grid (`auto | 1fr | auto`) — logo à esquerda, nav centralizado, botão à direita
+- `white-space:nowrap` no nome do logo — impedia quebra de linha em duas linhas
+- Removidos links de navegação duplicados que existiam no HTML (dois `nav-links`)
+- Botão "Agendar consulta" realinhado corretamente na zona direita do header
+
+### Melhorado (UI geral)
+- Menu mobile refeito como drawer lateral separado, com função `closeDrawer()` limpa
+- Tipografia revisada em todas as seções: tamanhos, espaçamentos e line-height
+- Cards de diferenciais ganharam borda e hover sutil
+- Credencial da Simone virou badge estilizada (fundo branco + borda), mais legível
+- Ícones dos info-cards de contato menores e mais refinados
+- Paleta levemente ajustada: rosa mais quente, verde mais cinza — combinação mais sofisticada
+- Diferencial "Flexibilidade de horários" substituído por "Atendimento domiciliar" — diferencial real e específico
+
+---
+
 ## [1.3.0] - 2026-09-22
 ### Conteúdo
 - Nome completo atualizado para **Simone Fukushima De Paula** em todo o site (header, footer, título da aba, alt das imagens)

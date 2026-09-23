@@ -10,563 +10,651 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --rosa:        #eebac0;
-    --rosa-deep:   #c97e88;
-    --rosa-soft:   #f8dde1;
-    --verde:       #a3ab9d;
-    --verde-deep:  #74806f;
-    --verde-soft:  #eceae5;
-    --cream:       #fdf8f6;
-    --white:       #ffffff;
-    --ink:         #241f1e;
-    --ink-soft:    #665c5a;
-    --line:        rgba(36,31,30,0.1);
-    --radius-lg:   32px;
-    --radius-md:   20px;
-    --radius-sm:   12px;
-    --shadow:      0 20px 50px -25px rgba(47,59,51,0.25);
-    --ff-display:  'Fraunces', serif;
-    --ff-body:     'Work Sans', sans-serif;
+  /* ── Tokens ── */
+  :root {
+    --rosa:       #eebac0;
+    --rosa-deep:  #c07080;
+    --rosa-soft:  #f8dde1;
+    --rosa-mid:   #f2ccd1;
+    --verde:      #a3ab9d;
+    --verde-deep: #6a7a66;
+    --verde-soft: #eaeae4;
+    --cream:      #fdf8f6;
+    --cream-2:    #f7f0ed;
+    --white:      #ffffff;
+    --ink:        #221c1b;
+    --ink-2:      #5a504e;
+    --ink-3:      #9c908e;
+    --line:       rgba(34,28,27,0.09);
+    --r-lg:  26px;
+    --r-md:  16px;
+    --r-sm:   8px;
+    --sh-sm: 0 4px 14px -4px rgba(34,28,27,0.10);
+    --sh:    0 14px 40px -16px rgba(34,28,27,0.20);
+    --sh-lg: 0 24px 56px -24px rgba(34,28,27,0.26);
+    --ff-d: "Fraunces", serif;
+    --ff-b: "Work Sans", sans-serif;
+    --mw: 1120px;
   }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:var(--ff-b); color:var(--ink);
+    background:var(--cream); line-height:1.7;
+    -webkit-font-smoothing:antialiased; font-size:16px;
+  }
+  img,svg { display:block; max-width:100%; }
+  a { color:inherit; text-decoration:none; }
+  ul { list-style:none; }
+  button { font-family:inherit; cursor:pointer; border:none; background:none; }
+  h1,h2,h3,h4 {
+    font-family:var(--ff-d); font-weight:500;
+    letter-spacing:-0.02em; color:var(--ink); line-height:1.1;
+  }
+  p { max-width:62ch; }
+  .container { width:100%; max-width:var(--mw); margin:0 auto; padding:0 28px; }
 
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--ff-body);
-    color:var(--ink);
-    background:var(--cream);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+  /* ── Eyebrow ── */
+  .ey {
+    display:inline-block; font-size:11px; letter-spacing:0.18em;
+    text-transform:uppercase; font-weight:700;
+    color:var(--verde-deep); margin-bottom:14px;
   }
-  img,svg{display:block;max-width:100%;}
-  a{color:inherit;text-decoration:none;}
-  ul{list-style:none;}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;}
-  h1,h2,h3,h4{font-family:var(--ff-display);font-weight:500;letter-spacing:-0.01em;color:var(--ink);}
-  .container{width:100%;max-width:1160px;margin:0 auto;padding:0 24px;}
-  section{position:relative;}
-  .eyebrow{
-    font-size:13px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--verde-deep);
-    font-weight:600;
-    margin-bottom:14px;
-    display:inline-block;
-  }
-  .lead{color:var(--ink-soft);font-size:17px;max-width:56ch;}
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:15px 30px;
-    border-radius:100px;
-    font-weight:600;
-    font-size:15px;
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
-  }
-  .btn-primary{
-    background:var(--rosa-deep);
-    color:var(--white);
-    box-shadow:0 14px 30px -12px rgba(201,123,126,0.55);
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(201,123,126,0.65);}
-  .btn-ghost{
-    background:transparent;
-    color:var(--ink);
-    border:1.5px solid var(--line);
-  }
-  .btn-ghost:hover{border-color:var(--verde-deep);color:var(--verde-deep);}
+  /* ── Lead ── */
+  .lead { color:var(--ink-2); font-size:17px; line-height:1.78; }
 
-  /* ---------- Header ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(251,246,242,0.85);
-    backdrop-filter:blur(10px);
+  /* ── Buttons ── */
+  .btn {
+    display:inline-flex; align-items:center; justify-content:center;
+    gap:8px; padding:13px 26px; border-radius:100px;
+    font-weight:600; font-size:14px; white-space:nowrap;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary {
+    background:var(--rosa-deep); color:var(--white);
+    box-shadow:0 8px 24px -8px rgba(192,112,128,0.48);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(192,112,128,0.58); }
+  .btn-outline {
+    background:transparent; color:var(--ink);
+    border:1.5px solid rgba(34,28,27,0.16);
+  }
+  .btn-outline:hover { border-color:var(--rosa-deep); color:var(--rosa-deep); }
+
+  /* ════════════════════════
+     HEADER — layout 3-zone
+  ════════════════════════ */
+  header {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(253,248,246,0.92);
+    backdrop-filter:blur(16px) saturate(1.5);
+    -webkit-backdrop-filter:blur(16px) saturate(1.5);
     border-bottom:1px solid transparent;
-    transition:border-color .3s ease, background .3s ease;
+    transition:border-color .3s, box-shadow .3s;
   }
-  header.scrolled{border-bottom-color:var(--line);}
-  .nav{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 24px;max-width:1160px;margin:0 auto;
+  header.scrolled {
+    border-bottom-color:var(--line);
+    box-shadow:0 2px 18px -6px rgba(34,28,27,0.09);
   }
-  .logo{
-    font-family:var(--ff-display);
-    font-size:22px;
-    color:var(--ink);
-    display:flex;flex-direction:column;line-height:1.1;
+  .nav {
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:24px;
+    padding:0 28px; height:70px;
+    max-width:var(--mw); margin:0 auto;
   }
-  .logo span{
-    font-family:var(--ff-body);
-    font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
-    color:var(--verde-deep);font-weight:600;margin-top:2px;
+  /* Zone 1 — Logo */
+  .logo-link {
+    display:flex; align-items:center; gap:10px;
+    flex-shrink:0; text-decoration:none;
   }
-  .logo-full{flex-direction:row;align-items:center;gap:12px;}
-  .logo-img{width:44px;height:auto;flex-shrink:0;}
-  footer .logo-img{width:40px;}
-  .nav-links{display:flex;gap:36px;align-items:center;}
-  .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .2s;}
-  .nav-links a:hover{color:var(--rosa-deep);}
-  .nav-cta{display:flex;align-items:center;gap:18px;}
-  .hamburger{display:none;flex-direction:column;gap:5px;width:26px;z-index:110;}
-  .hamburger span{height:2px;width:100%;background:var(--ink);border-radius:2px;transition:.3s;}
+  .logo-img { width:36px; height:auto; flex-shrink:0; }
+  .logo-name {
+    font-family:var(--ff-d); font-size:16px; font-weight:500;
+    color:var(--ink); white-space:nowrap; letter-spacing:-0.01em;
+    line-height:1.2;
+  }
+  /* Zone 2 — Nav links (centred) */
+  .nav-links {
+    display:flex; align-items:center; justify-content:center; gap:34px;
+  }
+  .nav-links a {
+    font-size:14px; font-weight:500; color:var(--ink-2);
+    transition:color .18s; white-space:nowrap;
+  }
+  .nav-links a:hover { color:var(--rosa-deep); }
+  /* Zone 3 — CTA */
+  .nav-cta { display:flex; align-items:center; gap:12px; }
+  /* Hamburger */
+  .hamburger {
+    display:none; flex-direction:column; gap:5px;
+    width:22px; cursor:pointer; background:none; border:none;
+    z-index:110;
+  }
+  .hamburger span {
+    height:2px; width:100%; background:var(--ink);
+    border-radius:2px; transition:.3s; display:block;
+  }
+  /* Mobile drawer */
+  .nav-drawer {
+    display:none; position:fixed; top:0; right:0; bottom:0;
+    width:72%; max-width:290px;
+    background:var(--white); flex-direction:column;
+    padding:88px 28px 28px; gap:6px;
+    box-shadow:-16px 0 40px rgba(34,28,27,0.12); z-index:105;
+  }
+  .nav-drawer.open { display:flex; }
+  .nav-drawer a {
+    font-size:16px; font-weight:500; color:var(--ink-2);
+    padding:10px 0; border-bottom:1px solid var(--line);
+    transition:color .18s;
+  }
+  .nav-drawer a:hover { color:var(--rosa-deep); }
+  .nav-drawer .btn { margin-top:16px; width:100%; justify-content:center; }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    padding:170px 0 120px;
-    overflow:hidden;
-    position:relative;
+  /* ════════════════════════
+     HERO
+  ════════════════════════ */
+  .hero {
+    padding:142px 0 96px; overflow:hidden;
+    position:relative; background:var(--cream);
   }
-  .hero-blob{
-    position:absolute;top:-160px;right:-160px;
-    width:640px;height:640px;
-    background:radial-gradient(circle at 30% 30%, var(--rosa-soft), transparent 70%);
-    border-radius:50%;
-    z-index:0;
+  .blob {
+    position:absolute; border-radius:50%; z-index:0; pointer-events:none;
   }
-  .hero-blob-2{
-    position:absolute;bottom:-220px;left:-200px;
-    width:520px;height:520px;
-    background:radial-gradient(circle at 60% 40%, var(--verde-soft), transparent 70%);
-    border-radius:50%;
-    z-index:0;
+  .blob-1 {
+    top:-180px; right:-180px; width:660px; height:660px;
+    background:radial-gradient(circle at 35% 35%, var(--rosa-soft), transparent 66%);
+    opacity:.75;
   }
-  .hero-inner{
-    position:relative;z-index:1;
-    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  .blob-2 {
+    bottom:-180px; left:-160px; width:540px; height:540px;
+    background:radial-gradient(circle at 55% 45%, var(--verde-soft), transparent 66%);
+    opacity:.65;
   }
-  .hero h1{
-    font-size:clamp(36px,4.6vw,58px);
-    line-height:1.08;
-    margin-bottom:24px;
+  .hero-inner {
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;
   }
-  .hero h1 em{
-    font-style:italic;color:var(--rosa-deep);
+  .hero h1 { font-size:clamp(32px,4vw,52px); margin-bottom:18px; margin-top:4px; }
+  .hero h1 em { font-style:italic; color:var(--rosa-deep); }
+  .hero .lead { margin-bottom:10px; max-width:46ch; }
+  .hero-sub { font-size:15px; color:var(--ink-3); margin-bottom:32px; }
+  .hero-ctas { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:40px; }
+  .trust-row {
+    display:flex; gap:28px; flex-wrap:wrap;
+    padding-top:24px; border-top:1px solid var(--line);
   }
-  .hero .lead{margin-bottom:36px;font-size:18px;}
-  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
-  .hero-trust{
-    display:flex;gap:28px;flex-wrap:wrap;
-    padding-top:28px;border-top:1px solid var(--line);
+  .trust-item { display:flex; flex-direction:column; gap:2px; }
+  .trust-item strong {
+    font-family:var(--ff-d); font-size:22px;
+    color:var(--rosa-deep); font-weight:500; line-height:1;
   }
-  .hero-trust div{font-size:13.5px;color:var(--ink-soft);}
-  .hero-trust strong{
-    display:block;font-family:var(--ff-display);font-size:22px;color:var(--ink);font-weight:500;
+  .trust-item span { font-size:12px; color:var(--ink-3); line-height:1.45; max-width:13ch; }
+  /* Photo frame */
+  .hero-visual {
+    position:relative; aspect-ratio:4/5; border-radius:var(--r-lg);
+    background:linear-gradient(148deg, var(--rosa-soft) 0%, var(--verde-soft) 100%);
+    padding:11px; box-shadow:var(--sh-lg);
   }
-  .hero-visual{
-    position:relative;
-    aspect-ratio:4/5;
-    border-radius:var(--radius-lg);
-    background:linear-gradient(155deg, var(--rosa-soft), var(--verde-soft));
-    padding:14px;
-    box-shadow:var(--shadow);
-  }
-  .hero-photo{
-    width:100%;height:100%;object-fit:cover;object-position:center top;
-    border-radius:calc(var(--radius-lg) - 10px);
-    box-shadow:0 30px 60px -30px rgba(36,31,30,0.35);
+  .hero-photo {
+    width:100%; height:100%; object-fit:cover; object-position:center top;
+    border-radius:calc(var(--r-lg) - 7px);
   }
 
-  /* soft wave divider */
-  .wave{display:block;width:100%;line-height:0;}
-  .wave svg{width:100%;height:80px;}
+  /* Wave */
+  .wave { display:block; width:100%; line-height:0; }
+  .wave svg { width:100%; height:68px; }
 
-  /* ---------- Sobre ---------- */
-  .sobre{background:var(--white);padding:100px 0;}
-  .sobre-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
-  .sobre-card{
-    background:linear-gradient(160deg,var(--verde-soft),var(--white));
-    border-radius:var(--radius-lg);
-    padding:44px;
-    box-shadow:var(--shadow);
-  }
-  .sobre-card h3{font-size:26px;margin-bottom:6px;}
-  .sobre-card p.role{color:var(--rosa-deep);font-weight:600;font-size:14px;margin-bottom:20px;}
-  .sobre h2{font-size:clamp(28px,3.2vw,38px);margin-bottom:22px;}
-  .sobre .lead{margin-bottom:18px;}
-  .pill-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
-  .pill{
-    padding:8px 16px;border-radius:100px;
-    background:var(--rosa-soft);color:var(--rosa-deep);
-    font-size:13px;font-weight:600;
-  }
-  .pill.green{background:var(--verde-soft);color:var(--verde-deep);}
+  /* ════════════════════════
+     SOBRE
+  ════════════════════════ */
+  .sobre { background:var(--white); padding:96px 0; }
+  .sobre-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:52px; align-items:start; }
 
-  /* ---------- Serviços ---------- */
-  .servicos{padding:110px 0;}
-  .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
-  .section-head h2{font-size:clamp(28px,3.4vw,40px);}
-  .servicos-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+  .sobre-card {
+    background:linear-gradient(152deg, #f0f3ee 0%, #fdf8f6 100%);
+    border-radius:var(--r-lg); padding:36px;
+    box-shadow:var(--sh); border:1px solid var(--line);
   }
-  .service-card{
-    background:var(--white);
-    border-radius:var(--radius-md);
-    padding:30px 26px;
+  .sobre-card h3 { font-size:22px; margin-bottom:4px; }
+  .sobre-card .role {
+    display:block; color:var(--rosa-deep); font-weight:600;
+    font-size:13px; margin-bottom:14px; line-height:1.5;
+  }
+  .sobre-card .cred {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--white); border:1px solid var(--line);
+    border-radius:100px; padding:5px 12px;
+    font-size:11.5px; font-weight:700; color:var(--verde-deep);
+    letter-spacing:0.04em; margin-bottom:16px;
+  }
+  .sobre-card .formacao {
+    font-size:13.5px; color:var(--ink-2); margin-bottom:18px; line-height:1.7; max-width:none;
+  }
+  .sobre-card .frase {
+    font-size:13.5px; color:var(--ink-2); font-style:italic;
+    border-left:3px solid var(--rosa-mid); padding-left:14px;
+    line-height:1.78; max-width:none; background:none;
+  }
+
+  .sobre-content { padding-top:6px; }
+  .sobre-content h2 { font-size:clamp(24px,2.6vw,34px); margin-bottom:10px; }
+  .sobre-content .lead { margin-bottom:26px; }
+  .subtopic { margin-bottom:18px; padding-left:0; }
+  .subtopic-label {
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--ff-b); font-size:14px; font-weight:700;
+    color:var(--ink); margin-bottom:5px;
+  }
+  .subtopic-label::before {
+    content:""; width:18px; height:2px;
+    background:var(--rosa-deep); border-radius:2px; flex-shrink:0;
+  }
+  .subtopic p { font-size:14px; color:var(--ink-2); max-width:none; }
+  .pill-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:22px; }
+  .pill {
+    padding:6px 14px; border-radius:100px;
+    background:var(--rosa-soft); color:var(--rosa-deep);
+    font-size:12px; font-weight:600; white-space:nowrap;
+  }
+  .pill.g { background:var(--verde-soft); color:var(--verde-deep); }
+
+  /* ════════════════════════
+     SERVIÇOS
+  ════════════════════════ */
+  .servicos { padding:96px 0; background:var(--cream); }
+  .sec-head { max-width:560px; margin:0 auto 48px; text-align:center; }
+  .sec-head h2 { font-size:clamp(24px,2.8vw,36px); margin-bottom:10px; }
+  .sec-head .lead { margin:0 auto; }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .sc {
+    background:var(--white); border-radius:var(--r-md);
+    padding:26px 22px; border:1px solid var(--line);
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .sc:hover { transform:translateY(-4px); box-shadow:var(--sh); border-color:transparent; }
+  .sc-icon {
+    width:42px; height:42px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .sc-icon.r { background:var(--rosa-soft); }
+  .sc-icon.g { background:var(--verde-soft); }
+  .sc h4 {
+    font-size:14.5px; margin-bottom:6px; font-weight:600;
+    font-family:var(--ff-b); color:var(--ink); line-height:1.3;
+  }
+  .sc p { font-size:13px; color:var(--ink-2); line-height:1.65; max-width:none; }
+
+  /* ════════════════════════
+     JORNADA
+  ════════════════════════ */
+  .jornada { background:var(--verde-soft); padding:96px 0; }
+  .jornada-track {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    position:relative; margin-top:24px;
+  }
+  .jornada-track::before {
+    content:""; position:absolute; top:32px; left:11%; right:11%; height:1.5px;
+    background:repeating-linear-gradient(90deg,var(--verde-deep) 0 7px,transparent 7px 16px);
+    opacity:.35;
+  }
+  .jornada-step { padding:0 26px; position:relative; }
+  .j-num {
+    width:64px; height:64px; border-radius:50%;
+    background:var(--white); display:flex; align-items:center; justify-content:center;
+    font-family:var(--ff-d); font-size:19px; font-weight:500; color:var(--rosa-deep);
+    box-shadow:var(--sh); margin-bottom:22px; position:relative; z-index:1;
+  }
+  .jornada-step h4 { font-size:18px; margin-bottom:9px; }
+  .jornada-step p { font-size:14px; color:var(--ink-2); max-width:none; }
+
+  /* ════════════════════════
+     DIFERENCIAIS
+  ════════════════════════ */
+  .diferenciais { padding:96px 0; background:var(--white); }
+  .dif-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .dif-item {
+    text-align:center; padding:28px 18px; border-radius:var(--r-md);
     border:1px solid var(--line);
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    transition:box-shadow .22s, transform .22s;
   }
-  .service-card:hover{
-    transform:translateY(-6px);
-    box-shadow:var(--shadow);
-    border-color:transparent;
+  .dif-item:hover { box-shadow:var(--sh-sm); transform:translateY(-3px); }
+  .dif-icon {
+    width:52px; height:52px; border-radius:50%;
+    background:linear-gradient(140deg, var(--rosa-soft), var(--verde-soft));
+    display:flex; align-items:center; justify-content:center; margin:0 auto 16px;
   }
-  .service-icon{
-    width:48px;height:48px;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:18px;
-  }
-  .service-icon.rosa{background:var(--rosa-soft);}
-  .service-icon.verde{background:var(--verde-soft);}
-  .service-card h4{font-size:17px;margin-bottom:8px;font-weight:600;font-family:var(--ff-body);}
-  .service-card p{font-size:14px;color:var(--ink-soft);}
+  .dif-item h4 { font-size:14.5px; margin-bottom:7px; font-family:var(--ff-b); font-weight:700; }
+  .dif-item p { font-size:13px; color:var(--ink-2); margin:0 auto; }
 
-  /* ---------- Jornada ---------- */
-  .jornada{background:var(--verde-soft);padding:110px 0;}
-  .jornada-track{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-    position:relative;margin-top:20px;
+  /* ════════════════════════
+     CONTATO
+  ════════════════════════ */
+  .contato { background:var(--cream-2); padding:96px 0; }
+  .contato-grid { display:grid; grid-template-columns:0.9fr 1.1fr; gap:52px; }
+  .contato-info h2 { font-size:clamp(24px,2.8vw,34px); margin-bottom:8px; }
+  .contato-info > .lead { margin-bottom:30px; }
+  .ic {
+    display:flex; gap:13px; align-items:flex-start;
+    padding:14px 0; border-bottom:1px solid var(--line);
   }
-  .jornada-track::before{
-    content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;
-    background:repeating-linear-gradient(90deg, var(--verde-deep) 0 8px, transparent 8px 16px);
-    opacity:.5;
+  .ic:last-child { border-bottom:none; }
+  .ic-icon {
+    width:38px; height:38px; border-radius:9px; flex-shrink:0;
+    background:var(--white); display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--sh-sm);
   }
-  .jornada-step{padding:0 24px;position:relative;text-align:left;}
-  .jornada-num{
-    width:68px;height:68px;border-radius:50%;
-    background:var(--white);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--ff-display);font-size:22px;color:var(--rosa-deep);
-    box-shadow:var(--shadow);margin-bottom:22px;position:relative;z-index:1;
-  }
-  .jornada-step h4{font-size:19px;margin-bottom:10px;}
-  .jornada-step p{font-size:14.5px;color:var(--ink-soft);}
+  .ic h4 { font-size:13px; font-weight:700; font-family:var(--ff-b); margin-bottom:2px; color:var(--ink); }
+  .ic p { font-size:13.5px; color:var(--ink-2); max-width:none; }
+  .ic a:hover { color:var(--rosa-deep); }
 
-  /* ---------- Diferenciais ---------- */
-  .diferenciais{padding:110px 0;}
-  .dif-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
-  .dif-item{text-align:center;padding:10px;}
-  .dif-icon{
-    width:56px;height:56px;border-radius:50%;
-    background:linear-gradient(150deg,var(--rosa-soft),var(--verde-soft));
-    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  .form-card {
+    background:var(--white); border-radius:var(--r-lg);
+    padding:38px; box-shadow:var(--sh);
   }
-  .dif-item h4{font-size:16px;margin-bottom:8px;}
-  .dif-item p{font-size:13.5px;color:var(--ink-soft);}
+  .form-card h3 {
+    font-size:19px; margin-bottom:22px;
+    font-family:var(--ff-b); font-weight:700;
+  }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+  .field { margin-bottom:14px; }
+  .field label {
+    display:block; font-size:11.5px; font-weight:700;
+    color:var(--ink-3); margin-bottom:5px;
+    letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .field input, .field select, .field textarea {
+    width:100%; padding:11px 14px; border-radius:9px;
+    border:1.5px solid var(--line); background:var(--cream);
+    font-family:inherit; font-size:14px; color:var(--ink);
+    transition:border-color .18s, background .18s;
+    appearance:none; -webkit-appearance:none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline:none; border-color:var(--rosa-deep); background:var(--white);
+  }
+  .field textarea { resize:vertical; min-height:90px; }
+  .form-note { font-size:11.5px; color:var(--ink-3); margin-top:10px; text-align:center; line-height:1.6; }
 
-  /* ---------- Contato ---------- */
-  .contato{background:var(--white);padding:110px 0;}
-  .contato-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;}
-  .contato-info h2{font-size:clamp(28px,3.2vw,38px);margin-bottom:18px;}
-  .info-card{
-    display:flex;gap:16px;align-items:flex-start;
-    padding:20px 0;border-bottom:1px solid var(--line);
+  /* ════════════════════════
+     FOOTER
+  ════════════════════════ */
+  footer { background:var(--ink); color:var(--white); padding:52px 0 26px; }
+  .footer-grid {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:32px; padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
   }
-  .info-card:last-child{border-bottom:none;}
-  .info-icon{
-    width:42px;height:42px;border-radius:12px;flex-shrink:0;
-    background:var(--verde-soft);display:flex;align-items:center;justify-content:center;
+  footer .logo-name { color:var(--white); font-size:15px; }
+  .footer-tag { font-size:13px; color:rgba(255,255,255,0.5); max-width:32ch; margin-top:10px; line-height:1.65; }
+  .footer-links { display:flex; gap:44px; flex-wrap:wrap; }
+  .footer-links h5 {
+    font-size:10.5px; text-transform:uppercase; letter-spacing:0.12em;
+    color:rgba(255,255,255,0.38); margin-bottom:14px; font-weight:700;
   }
-  .info-card h4{font-size:15px;margin-bottom:4px;font-family:var(--ff-body);font-weight:600;}
-  .info-card p{font-size:14px;color:var(--ink-soft);}
-  .info-card a:hover{color:var(--rosa-deep);}
-
-  .form-card{
-    background:var(--cream);
-    border-radius:var(--radius-lg);
-    padding:40px;
-    box-shadow:var(--shadow);
-  }
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .field{margin-bottom:18px;}
-  .field label{
-    display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:7px;
-  }
-  .field input,.field select,.field textarea{
-    width:100%;padding:13px 16px;border-radius:12px;
-    border:1.5px solid var(--line);background:var(--white);
-    font-family:inherit;font-size:14.5px;color:var(--ink);
-    transition:border-color .2s;
-  }
-  .field input:focus,.field select:focus,.field textarea:focus{
-    outline:none;border-color:var(--rosa-deep);
-  }
-  .field textarea{resize:vertical;min-height:100px;}
-  .form-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
-
-  /* ---------- Footer ---------- */
-  footer{background:var(--ink);color:var(--white);padding:56px 0 28px;}
-  .footer-grid{
-    display:flex;justify-content:space-between;align-items:flex-start;
-    flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.12);
-  }
-  footer .logo{color:var(--white);}
-  footer .logo span{color:var(--rosa);}
-  .footer-links{display:flex;gap:40px;flex-wrap:wrap;}
-  .footer-links h5{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.5);margin-bottom:14px;font-weight:600;}
-  .footer-links a{display:block;font-size:14px;margin-bottom:10px;color:rgba(255,255,255,0.85);}
-  .footer-links a:hover{color:var(--rosa);}
-  .footer-bottom{
-    padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-size:12.5px;color:rgba(255,255,255,0.45);
+  .footer-links a { display:block; font-size:13.5px; margin-bottom:9px; color:rgba(255,255,255,0.75); transition:color .18s; }
+  .footer-links a:hover { color:var(--rosa); }
+  .footer-bottom {
+    padding-top:20px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:8px; font-size:11.5px; color:rgba(255,255,255,0.3);
   }
 
-  /* ---------- WhatsApp float ---------- */
-  .wa-float{
-    position:fixed;bottom:26px;right:26px;z-index:200;
-    width:60px;height:60px;border-radius:50%;
-    background:#25D366;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 12px 28px -8px rgba(37,211,102,0.6);
-    animation:pulse 2.6s infinite;
+  /* WhatsApp float */
+  .wa-float {
+    position:fixed; bottom:22px; right:22px; z-index:200;
+    width:56px; height:56px; border-radius:50%; background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 26px -6px rgba(37,211,102,0.52);
+    animation:wa-pulse 2.8s ease-in-out infinite;
+    transition:transform .2s;
   }
-  .wa-float:hover{transform:scale(1.06);}
-  @keyframes pulse{
-    0%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 0 rgba(37,211,102,0.5);}
-    70%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 14px rgba(37,211,102,0);}
-    100%{box-shadow:0 12px 28px -8px rgba(37,211,102,0.6),0 0 0 0 rgba(37,211,102,0);}
+  .wa-float:hover { transform:scale(1.08); }
+  @keyframes wa-pulse {
+    0%   { box-shadow:0 8px 26px -6px rgba(37,211,102,0.52), 0 0 0 0   rgba(37,211,102,0.38); }
+    65%  { box-shadow:0 8px 26px -6px rgba(37,211,102,0.52), 0 0 0 14px rgba(37,211,102,0); }
+    100% { box-shadow:0 8px 26px -6px rgba(37,211,102,0.52), 0 0 0 0   rgba(37,211,102,0); }
   }
-  @media (prefers-reduced-motion: reduce){
-    .wa-float{animation:none;}
-    *{scroll-behavior:auto !important;}
-  }
+  @media (prefers-reduced-motion:reduce) { .wa-float { animation:none; } * { scroll-behavior:auto !important; } }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width:980px){
-    .hero-inner{grid-template-columns:1fr;}
-    .hero-visual{max-width:420px;margin:0 auto;order:-1;}
-    .sobre-grid{grid-template-columns:1fr;}
-    .servicos-grid{grid-template-columns:repeat(2,1fr);}
-    .jornada-track{grid-template-columns:1fr;gap:36px;}
-    .jornada-track::before{display:none;}
-    .dif-grid{grid-template-columns:repeat(2,1fr);}
-    .contato-grid{grid-template-columns:1fr;}
+  /* ════════════════════════
+     RESPONSIVO
+  ════════════════════════ */
+  @media (max-width:1024px) {
+    .services-grid { grid-template-columns:repeat(2,1fr); }
+    .dif-grid { grid-template-columns:repeat(2,1fr); }
   }
-  @media (max-width:720px){
-    .nav-links,.nav-cta .btn-ghost{display:none;}
-    .hamburger{display:flex;}
-    .nav-cta.open-menu{
-      display:flex;position:fixed;top:0;right:0;bottom:0;width:78%;max-width:320px;
-      background:var(--white);flex-direction:column;align-items:flex-start;
-      padding:100px 30px 30px;gap:22px;box-shadow:-20px 0 40px rgba(0,0,0,0.1);
-    }
-    .nav-cta.open-menu .nav-links{display:flex;flex-direction:column;gap:22px;}
-    .nav-cta.open-menu .btn-ghost{display:inline-flex;}
-    .hero{padding:130px 0 80px;}
-    .form-row{grid-template-columns:1fr;}
-    .servicos-grid{grid-template-columns:1fr;}
-    .dif-grid{grid-template-columns:1fr;}
-    .footer-grid{flex-direction:column;}
+  @media (max-width:860px) {
+    .hero-inner { grid-template-columns:1fr; }
+    .hero-visual { max-width:380px; margin:0 auto; order:-1; }
+    .sobre-grid { grid-template-columns:1fr; }
+    .jornada-track { grid-template-columns:1fr; gap:36px; }
+    .jornada-track::before { display:none; }
+    .contato-grid { grid-template-columns:1fr; }
+  }
+  @media (max-width:680px) {
+    .nav-links, .nav-cta { display:none; }
+    .hamburger { display:flex; }
+    .hero { padding:118px 0 68px; }
+    .hero h1 { font-size:30px; }
+    .form-row { grid-template-columns:1fr; }
+    .services-grid { grid-template-columns:1fr; }
+    .dif-grid { grid-template-columns:1fr 1fr; }
+    .footer-grid { flex-direction:column; }
+    .footer-links { gap:24px; }
+  }
+  @media (max-width:400px) {
+    .dif-grid { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= HEADER ================= -->
-<header id="site-header">
+<!-- HEADER -->
+<header id="hdr">
   <div class="nav">
-    <a href="#top" class="logo logo-full"><img src="assets/logo.png" alt="Simone Fukushima De Paula - Fisioterapia" class="logo-img">Simone Fukushima De Paula<span>Fisioterapia · Saúde da Mulher</span></a>
-    <div class="nav-cta" id="navCta">
-      <ul class="nav-links">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#jornada">Jornada</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-      <a href="#contato" class="btn btn-ghost">Agendar consulta</a>
+    <!-- Zone 1: Logo -->
+    <a href="#top" class="logo-link">
+      <img src="assets/logo.png" alt="Simone Fukushima De Paula" class="logo-img">
+      <span class="logo-name">Simone Fukushima De Paula</span>
+    </a>
+    <!-- Zone 2: Nav (centred) -->
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#jornada">Jornada</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <!-- Zone 3: CTA + hamburger -->
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-outline">Agendar consulta</a>
+      <button class="hamburger" id="ham" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
-<!-- ================= HERO ================= -->
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="drawer">
+  <a href="#sobre" onclick="closeDrawer()">Sobre</a>
+  <a href="#servicos" onclick="closeDrawer()">Serviços</a>
+  <a href="#jornada" onclick="closeDrawer()">Jornada</a>
+  <a href="#contato" onclick="closeDrawer()">Contato</a>
+  <a href="#contato" class="btn btn-primary" onclick="closeDrawer()">Agendar consulta</a>
+</div>
+
+<!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-blob"></div>
-  <div class="hero-blob-2"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
   <div class="container hero-inner">
     <div>
-      <span class="eyebrow">Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher — Campinas</span>
+      <span class="ey">Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher — Campinas</span>
       <h1>Cuidado especializado para <em>cada fase</em> da vida da mulher</h1>
-      <p class="lead">Atendimento acolhedor e humanizado.</p>
+      <p class="lead">Atendimento acolhedor e humanizado, com escuta ativa e respeito ao seu tempo.</p>
+      <p class="hero-sub">Fisioterapia pélvica, dermatofuncional e pós-cirúrgica — para cada fase da sua vida.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" id="heroWaBtn" href="#" target="_blank" rel="noopener">
-          Agendar pelo WhatsApp
-        </a>
-        <a class="btn btn-ghost" href="#servicos">Ver especialidades</a>
+        <a class="btn btn-primary" id="heroWaBtn" href="#" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+        <a class="btn btn-outline" href="#servicos">Ver especialidades</a>
       </div>
-      <div class="hero-trust">
-        <div><strong>8+</strong>áreas de atuação especializadas</div>
-        <div><strong>Individual</strong>atendimento particular e reservado</div>
-        <div><strong>Campinas</strong>ambiente acolhedor e privativo</div>
+      <div class="trust-row">
+        <div class="trust-item"><strong>9</strong><span>especialidades de atendimento</span></div>
+        <div class="trust-item"><strong>+20</strong><span>anos cuidando de mulheres</span></div>
+        <div class="trust-item"><strong>100%</strong><span>atendimento individual e reservado</span></div>
       </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/photo.jpg" alt="Simone de Paula, fisioterapeuta especializada em saúde pélvica" class="hero-photo">
+      <img src="assets/photo.jpg" alt="Simone Fukushima De Paula, fisioterapeuta especializada em saúde da mulher" class="hero-photo">
     </div>
   </div>
 </section>
 
 <div class="wave">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z" fill="#fffdfb"/></svg>
+  <svg viewBox="0 0 1440 68" preserveAspectRatio="none"><path d="M0,34 C400,78 1040,-8 1440,34 L1440,68 L0,68 Z" fill="#ffffff"/></svg>
 </div>
 
-<!-- ================= SOBRE ================= -->
+<!-- SOBRE -->
 <section class="sobre" id="sobre">
   <div class="container sobre-grid">
     <div class="sobre-card">
-      <span class="eyebrow">Quem cuida de você</span>
+      <span class="ey">Quem cuida de você</span>
       <h3>Simone Fukushima De Paula</h3>
-      <p class="role">Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher</p>
-      <p style="font-size:13px;color:var(--verde-deep);font-weight:600;margin-bottom:8px;">CREFITO/3: 223045-F &nbsp;·&nbsp; RQE: 1100261118</p>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:16px;">Formação pela Unicamp e Santa Casa de Misericórdia de São Paulo. Há mais de 20 anos cuidando de mulheres.</p>
-      <p style="font-size:14px;color:var(--ink-soft);font-style:italic;border-left:3px solid var(--rosa-deep);padding-left:14px;line-height:1.7;">"Toda mulher merece um cuidado único, atento, acolhedor, de escuta ativa, sem julgamentos, com privacidade e respeito."</p>
+      <span class="role">Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher</span>
+      <span class="cred">CREFITO/3: 223045-F &nbsp;·&nbsp; RQE: 1100261118</span>
+      <p class="formacao">Formação pela Unicamp e Santa Casa de Misericórdia de São Paulo. Há mais de 20 anos cuidando de mulheres.</p>
+      <p class="frase">"Toda mulher merece um cuidado único, atento, acolhedor, de escuta ativa, sem julgamentos, com privacidade e respeito."</p>
     </div>
-    <div>
-      <span class="eyebrow">Sobre o atendimento</span>
+    <div class="sobre-content">
+      <span class="ey">Sobre o atendimento</span>
       <h2>Fisioterapia com olhar clínico, baseada em evidências científicas</h2>
-      <p class="lead" style="margin-bottom:20px;">Técnicas funcionais respeitando o tempo de cada paciente.</p>
-      <p style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;">Na área pélvica</p>
-      <p style="font-size:14.5px;color:var(--ink-soft);margin-bottom:18px;">O assoalho pélvico sustenta muito mais do que se vê: postura, continência, sexualidade e autoestima. O acompanhamento é construído para tratar a causa, não apenas o sintoma — com avaliação individualizada e plano terapêutico específico para o seu momento de vida.</p>
-      <p style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;">No pós-cirúrgico</p>
-      <p style="font-size:14.5px;color:var(--ink-soft);margin-bottom:22px;">Os atendimentos podem ser feitos no conforto do seu lar ou no consultório, sempre visando o bem-estar e a recuperação rápida e funcional da paciente.</p>
-      <div class="pill-list">
-        <span class="pill">+20 anos cuidando de mulheres</span>
-        <span class="pill green">Ambiente reservado</span>
+      <p class="lead">Técnicas funcionais respeitando o tempo de cada paciente.</p>
+      <div class="subtopic">
+        <p class="subtopic-label">Na área pélvica</p>
+        <p>O assoalho pélvico sustenta muito mais do que se vê: postura, continência, sexualidade e autoestima. O acompanhamento é construído para tratar a causa, não apenas o sintoma — com avaliação individualizada e plano terapêutico específico para o seu momento de vida.</p>
+      </div>
+      <div class="subtopic">
+        <p class="subtopic-label">No pós-cirúrgico</p>
+        <p>Os atendimentos podem ser feitos no conforto do seu lar ou no consultório, sempre visando o bem-estar e a recuperação rápida e funcional da paciente.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">+20 anos de experiência</span>
+        <span class="pill g">Ambiente reservado</span>
         <span class="pill">Baseada em evidências</span>
-        <span class="pill green">Atendimento domiciliar</span>
+        <span class="pill g">Atendimento domiciliar</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SERVIÇOS ================= -->
+<!-- SERVIÇOS -->
 <section class="servicos" id="servicos">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Especialidades</span>
+    <div class="sec-head">
+      <span class="ey">Especialidades</span>
       <h2>Cuidados pensados para cada necessidade</h2>
     </div>
-    <div class="servicos-grid" id="servicosGrid">
-      <!-- cards injected by JS from the SERVICES list below -->
-    </div>
+    <div class="services-grid" id="sGrid"></div>
   </div>
 </section>
 
-<!-- ================= JORNADA ================= -->
+<!-- JORNADA -->
 <section class="jornada" id="jornada">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Jornada da maternidade</span>
+    <div class="sec-head">
+      <span class="ey">Jornada da maternidade</span>
       <h2>Acompanhamento em cada fase da gestação</h2>
-      <p class="lead" style="margin:16px auto 0;">Um cuidado contínuo, do preparo para o parto à recuperação total do corpo.</p>
+      <p class="lead" style="margin:12px auto 0;">Um cuidado contínuo, do preparo para o parto à recuperação total do corpo.</p>
     </div>
     <div class="jornada-track">
       <div class="jornada-step">
-        <div class="jornada-num">01</div>
+        <div class="j-num">01</div>
         <h4>Pré-parto</h4>
         <p>Preparo do assoalho pélvico, orientações posturais e respiratórias para uma gestação mais confortável e um parto mais preparado.</p>
       </div>
       <div class="jornada-step">
-        <div class="jornada-num">02</div>
+        <div class="j-num">02</div>
         <h4>Peri-parto</h4>
         <p>Suporte próximo ao momento do parto, com orientações práticas sobre posicionamento, respiração e manejo da dor.</p>
       </div>
       <div class="jornada-step">
-        <div class="jornada-num">03</div>
+        <div class="j-num">03</div>
         <h4>Pós-parto</h4>
-        <p>Reabilitação do assoalho pélvico, cuidados com cicatrizes, consultoria de amamentação e retorno gradual às atividades.</p>
+        <p>Reabilitação do assoalho pélvico, cuidados com cicatrizes, orientação em amamentação e retorno gradual às atividades.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= DIFERENCIAIS ================= -->
+<!-- DIFERENCIAIS -->
 <section class="diferenciais">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Por que escolher</span>
+    <div class="sec-head">
+      <span class="ey">Por que escolher</span>
       <h2>Um cuidado feito sob medida</h2>
     </div>
     <div class="dif-grid">
       <div class="dif-item">
-        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M12 21s-7-4.5-9.3-9C1.2 8.3 3 5 6.4 5 8.6 5 10.6 6.3 12 8c1.4-1.7 3.4-3 5.6-3 3.4 0 5.2 3.3 3.7 7-2.3 4.5-9.3 9-9.3 9z"/></svg></div>
+        <div class="dif-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><path d="M12 21s-7-4.5-9.3-9C1.2 8.3 3 5 6.4 5 8.6 5 10.6 6.3 12 8c1.4-1.7 3.4-3 5.6-3 3.4 0 5.2 3.3 3.7 7-2.3 4.5-9.3 9-9.3 9z"/></svg></div>
         <h4>Atendimento humanizado</h4>
-        <p>Escuta atenta e respeito ao ritmo de cada paciente.</p>
+        <p>Escuta ativa e respeito ao ritmo de cada paciente.</p>
       </div>
       <div class="dif-item">
-        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <div class="dif-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c07080" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
         <h4>Avaliação individualizada</h4>
         <p>Plano terapêutico construído para o seu momento e objetivo.</p>
       </div>
       <div class="dif-item">
-        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></div>
+        <div class="dif-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 12h6M12 9v6"/></svg></div>
         <h4>Espaço privativo</h4>
-        <p>Ambiente reservado e confortável, pensado para o cuidado íntimo.</p>
+        <p>Ambiente reservado e confortável para o cuidado íntimo.</p>
       </div>
       <div class="dif-item">
-        <div class="dif-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h4>Flexibilidade de horários</h4>
-        <p>Agendamento facilitado, direto pelo WhatsApp.</p>
+        <div class="dif-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c07080" stroke-width="1.8"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <h4>Atendimento domiciliar</h4>
+        <p>Recuperação no conforto do seu lar, quando necessário.</p>
       </div>
     </div>
   </div>
 </section>
 
 <div class="wave" style="transform:rotate(180deg)">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,90 1080,-10 1440,40 L1440,80 L0,80 Z" fill="#e6ede2"/></svg>
+  <svg viewBox="0 0 1440 68" preserveAspectRatio="none"><path d="M0,34 C400,78 1040,-8 1440,34 L1440,68 L0,68 Z" fill="#eaeae4"/></svg>
 </div>
 
-<!-- ================= CONTATO ================= -->
+<!-- CONTATO -->
 <section class="contato" id="contato">
   <div class="container contato-grid">
     <div class="contato-info">
-      <span class="eyebrow">Vamos conversar</span>
+      <span class="ey">Vamos conversar</span>
       <h2>Agende sua avaliação</h2>
-      <p class="lead" style="margin-bottom:8px;">Preencha o formulário ou chame diretamente no WhatsApp — a resposta é rápida e o primeiro passo é só uma conversa.</p>
+      <p class="lead">Preencha o formulário ou chame no WhatsApp — o primeiro passo é só uma conversa.</p>
 
-      <div class="info-card">
-        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><path d="M20 15.5a2 2 0 01-2.2 2A18 18 0 013 5.2 2 2 0 015 3h3.5a1 1 0 011 .8l.7 3.3a1 1 0 01-.3 1L8 9.7a13 13 0 006 6l1.6-1.9a1 1 0 011-.3l3.3.7a1 1 0 01.8 1V15.5z"/></svg></div>
-        <div>
-          <h4>WhatsApp</h4>
-          <p><a href="#" id="infoWaLink" target="_blank" rel="noopener">(19) 99125-5241</a></p>
-        </div>
+      <div class="ic">
+        <div class="ic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><path d="M20 15.5a2 2 0 01-2.2 2A18 18 0 013 5.2 2 2 0 015 3h3.5a1 1 0 011 .8l.7 3.3a1 1 0 01-.3 1L8 9.7a13 13 0 006 6l1.6-1.9a1 1 0 011-.3l3.3.7a1 1 0 01.8 1V15.5z"/></svg></div>
+        <div><h4>WhatsApp</h4><p><a href="#" id="infoWaLink" target="_blank" rel="noopener">(19) 99125-5241</a></p></div>
       </div>
-      <div class="info-card">
-        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-        <div>
-          <h4>Atendimento</h4>
-          <p>Campinas, SP — endereço enviado no agendamento</p>
-        </div>
+      <div class="ic">
+        <div class="ic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c07080" stroke-width="1.8"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <div><h4>Atendimento</h4><p>Campinas, SP — endereço enviado no agendamento</p></div>
       </div>
-      <div class="info-card">
-        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
-        <div>
-          <h4>E-mail</h4>
-          <p><a href="mailto:simonefukufisio@gmail.com">simonefukufisio@gmail.com</a></p>
-        </div>
+      <div class="ic">
+        <div class="ic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <div><h4>E-mail</h4><p><a href="mailto:simonefukufisio@gmail.com">simonefukufisio@gmail.com</a></p></div>
       </div>
-      <div class="info-card">
-        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="#c97b7e" stroke="none"/></svg></div>
-        <div>
-          <h4>Instagram</h4>
-          <p><a href="https://instagram.com/simonefukufisio" target="_blank" rel="noopener">@simonefukufisio</a></p>
-        </div>
+      <div class="ic">
+        <div class="ic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c07080" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="#c07080" stroke="none"/></svg></div>
+        <div><h4>Instagram</h4><p><a href="https://instagram.com/simonefukufisio" target="_blank" rel="noopener">@simonefukufisio</a></p></div>
       </div>
-      <div class="info-card">
-        <div class="info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <div>
-          <h4>Horários</h4>
-          <p>Segunda a sexta, mediante agendamento prévio</p>
-        </div>
+      <div class="ic">
+        <div class="ic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div><h4>Horários</h4><p>Segunda a sexta, mediante agendamento prévio</p></div>
       </div>
     </div>
 
     <div class="form-card">
+      <h3>Envie sua mensagem</h3>
       <form id="contactForm">
         <div class="form-row">
           <div class="field">
@@ -589,7 +677,7 @@
             <option>Pós-cirúrgico estético</option>
             <option>Drenagem linfática especializada</option>
             <option>Laserterapia</option>
-            <option>Tratamentos estéticos e estética íntima</option>
+            <option>Estética íntima</option>
             <option>Ainda não sei, quero conversar</option>
           </select>
         </div>
@@ -597,20 +685,23 @@
           <label for="mensagem">Mensagem</label>
           <textarea id="mensagem" placeholder="Conte um pouco sobre o que você procura..."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Enviar pelo WhatsApp</button>
-        <p class="form-note">Ao enviar, você será direcionada ao WhatsApp com sua mensagem pronta para envio.</p>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:14px;">Enviar pelo WhatsApp</button>
+        <p class="form-note">Ao enviar, você será direcionada ao WhatsApp com sua mensagem já preenchida.</p>
       </form>
     </div>
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="#top" class="logo logo-full"><img src="assets/logo.png" alt="Simone Fukushima De Paula - Fisioterapia" class="logo-img">Simone Fukushima De Paula<span>Fisioterapia · Saúde da Mulher</span></a>
-        <p style="font-size:13.5px;color:rgba(255,255,255,0.6);max-width:36ch;margin-top:14px;">Cuidado especializado em saúde pélvica, do preparo para o parto à recuperação — em Campinas, SP.</p>
+        <a href="#top" class="logo-link">
+          <img src="assets/logo.png" alt="Simone Fukushima De Paula" class="logo-img">
+          <span class="logo-name">Simone Fukushima De Paula</span>
+        </a>
+        <p class="footer-tag">Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher — Campinas, SP</p>
       </div>
       <div class="footer-links">
         <div>
@@ -629,89 +720,70 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Simone Fukushima De Paula — Fisioterapia</span>
+      <span>&copy; <span id="yr"></span> Simone Fukushima De Paula &mdash; Fisioterapia</span>
       <span>Campinas, SP</span>
     </div>
   </div>
 </footer>
 
-<!-- ================= WHATSAPP FLOAT ================= -->
+<!-- WhatsApp float -->
 <a class="wa-float" id="floatWaBtn" href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5S9.4 7 9.2 6.5c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3 2.8 1.2 2.8.8 3.3.8.5 0 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 15 3 13.5 3 12 3 7 7 3 12 3s9 4 9 9-4 8.3-9 8.3z"/></svg>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5S9.4 7 9.2 6.5c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3 2.8 1.2 2.8.8 3.3.8.5 0 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5c1.5.8 3.3 1.3 5.2 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 15 3 13.5 3 12 3 7 7 3 12 3s9 4 9 9-4 8.3-9 8.3z"/></svg>
 </a>
 
 <script>
-  // ---- Services data (single source of truth) ----
   const SERVICES = [
-    {t:"Cuidados pré, peri e pós-parto", d:"Preparo, suporte e recuperação em todas as fases da gestação.", i:"rosa"},
-    {t:"Orientação em amamentação", d:"Orientação prática e acolhedora para uma amamentação mais tranquila e eficiente.", i:"verde"},
-    {t:"Dores pélvicas e na relação sexual", d:"Avaliação e tratamento individualizado para dores pélvicas.", i:"rosa"},
-    {t:"Perda de urina e flatos vaginais", d:"Reabilitação do assoalho pélvico para recuperar controle e conforto.", i:"verde"},
-    {t:"Pós-cirúrgico", d:"Acompanhamento funcional na recuperação de cirurgias ginecológicas, obstétricas e das mamas.", i:"rosa"},
-    {t:"Pós-cirúrgico estético", d:"Acompanhamento na recuperação e tratamento das intercorrências do pós-cirúrgico de cirurgias plásticas faciais e corporais.", i:"verde"},
-    {t:"Drenagem linfática especializada", d:"Técnicas específicas para redução de edemas e bem-estar corporal.", i:"rosa"},
-    {t:"Laserterapia", d:"Recurso terapêutico para cicatrização e alívio de desconfortos.", i:"verde"},
-    {t:"Estética íntima", d:"Tratamentos estéticos voltados ao cuidado e à autoestima da mulher.", i:"rosa"},
+    {t:"Cuidados pré, peri e pós-parto", d:"Preparo, suporte e recuperação em todas as fases da gestação.", c:"r"},
+    {t:"Orientação em amamentação", d:"Orientação prática e acolhedora para uma amamentação mais tranquila e eficiente.", c:"g"},
+    {t:"Dores pélvicas e na relação sexual", d:"Avaliação e tratamento individualizado para dores pélvicas.", c:"r"},
+    {t:"Perda de urina e flatos vaginais", d:"Reabilitação do assoalho pélvico para recuperar controle e conforto.", c:"g"},
+    {t:"Pós-cirúrgico", d:"Acompanhamento funcional na recuperação de cirurgias ginecológicas, obstétricas e das mamas.", c:"r"},
+    {t:"Pós-cirúrgico estético", d:"Acompanhamento na recuperação e tratamento das intercorrências do pós-cirúrgico de cirurgias plásticas faciais e corporais.", c:"g"},
+    {t:"Drenagem linfática especializada", d:"Técnicas específicas para redução de edemas e bem-estar corporal.", c:"r"},
+    {t:"Laserterapia", d:"Recurso terapêutico para cicatrização e alívio de desconfortos.", c:"g"},
+    {t:"Estética íntima", d:"Tratamentos estéticos voltados ao cuidado e à autoestima da mulher.", c:"r"},
   ];
-
-  const icons = {
-    rosa: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c97b7e" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
-    verde:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6f8a72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>'
-  };
-
-  const grid = document.getElementById('servicosGrid');
-  SERVICES.forEach(s=>{
-    const card = document.createElement('div');
-    card.className = 'service-card';
-    card.innerHTML = `
-      <div class="service-icon ${s.i}">${icons[s.i]}</div>
-      <h4>${s.t}</h4>
-      <p>${s.d}</p>`;
-    grid.appendChild(card);
+  const svgR = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c07080" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>';
+  const svgG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6a7a66" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>';
+  const grid = document.getElementById("sGrid");
+  SERVICES.forEach(s => {
+    const d = document.createElement("div");
+    d.className = "sc";
+    d.innerHTML = `<div class="sc-icon ${s.c}">${s.c==="r"?svgR:svgG}</div><h4>${s.t}</h4><p>${s.d}</p>`;
+    grid.appendChild(d);
   });
 
-  // ---- WhatsApp wiring ----
-  const WA_NUMBER = "5519991255241"; // 55 + DDD 19 + numero
-  const baseMsg = "Olá, Simone! Gostaria de agendar uma avaliação.";
-  const waBase = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(baseMsg)}`;
-  ['heroWaBtn','floatWaBtn','infoWaLink','footerWaLink'].forEach(id=>{
+  // WhatsApp
+  const WA = "5519991255241";
+  const MSG = encodeURIComponent("Olá, Simone! Gostaria de agendar uma avaliação.");
+  const WA_URL = `https://wa.me/${WA}?text=${MSG}`;
+  ["heroWaBtn","floatWaBtn","infoWaLink","footerWaLink"].forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.href = waBase;
+    if (el) el.href = WA_URL;
   });
 
-  // Contact form -> builds a custom WhatsApp message
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    const nome = document.getElementById('nome').value.trim();
-    const telefone = document.getElementById('telefone').value.trim();
-    const assunto = document.getElementById('assunto').value;
-    const mensagem = document.getElementById('mensagem').value.trim();
-
-    let text = `Olá, Simone! Me chamo ${nome}.\nTelefone: ${telefone}\nÁrea de interesse: ${assunto}`;
-    if(mensagem) text += `\nMensagem: ${mensagem}`;
-
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    const nome = document.getElementById("nome").value.trim();
+    const tel  = document.getElementById("telefone").value.trim();
+    const ass  = document.getElementById("assunto").value;
+    const msg  = document.getElementById("mensagem").value.trim();
+    let text = `Olá, Simone! Me chamo ${nome}.\nTelefone: ${tel}\nÁrea de interesse: ${ass}`;
+    if (msg) text += `\nMensagem: ${msg}`;
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, "_blank");
   });
 
-  // ---- Header scroll state ----
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', ()=>{
-    header.classList.toggle('scrolled', window.scrollY > 10);
-  });
+  // Header scroll
+  const hdr = document.getElementById("hdr");
+  window.addEventListener("scroll", () => hdr.classList.toggle("scrolled", window.scrollY > 8));
 
-  // ---- Mobile menu ----
-  const hamburger = document.getElementById('hamburger');
-  const navCta = document.getElementById('navCta');
-  hamburger.addEventListener('click', ()=>{
-    navCta.classList.toggle('open-menu');
-    hamburger.classList.toggle('active');
-  });
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.addEventListener('click', ()=> navCta.classList.remove('open-menu'));
-  });
+  // Mobile drawer
+  const ham = document.getElementById("ham");
+  const drawer = document.getElementById("drawer");
+  ham.addEventListener("click", () => drawer.classList.toggle("open"));
+  function closeDrawer() { drawer.classList.remove("open"); }
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
