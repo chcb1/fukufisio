@@ -5,6 +5,24 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.5.0] - 2026-09-23
+### Adicionado — SEO e Analytics
+- **Google Analytics 4** integrado (`G-YCW4MYYGL5`) no `<head>`
+- **Canonical URL** apontando para `https://www.simonefukufisio.com.br`
+- **Open Graph** completo: título, descrição, imagem, URL e locale `pt_BR`
+- **Twitter/X Card** (`summary_large_image`) para compartilhamento
+- **Schema.org `MedicalBusiness`**: nome, descrição, telefone, e-mail, endereço, coordenadas, horário, Instagram e imagem — habilita painel lateral no Google
+- **`sitemap.xml`** gerado na raiz — pronto para submeter no Search Console
+- **`robots.txt`** criado na raiz com referência ao sitemap
+- Placeholder comentado para tag do Google Search Console (preencher após passo 2)
+
+### Pendente
+- Descomentar `<meta name="google-site-verification">` após obter tag no Search Console
+- Submeter `sitemap.xml` no Search Console após verificação de propriedade
+- Atualizar `lastmod` do sitemap a cada deploy com mudanças de conteúdo relevante
+
+---
+
 ## [1.4.0] - 2026-09-23
 ### Corrigido
 - Header reconstruído em layout 3-zone com CSS Grid (`auto | 1fr | auto`) — logo à esquerda, nav centralizado, botão à direita
