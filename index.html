@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simone Fukushima De Paula | Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher - Campinas</title>
+<title>Simone | Fisioterapia</title>
 <meta name="description" content="Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher em Campinas. Mais de 20 anos cuidando de mulheres: saúde pélvica, pós-parto, estética, drenagem e mais.">
 <link rel="icon" type="image/png" href="assets/logo.png">
 
@@ -720,20 +720,22 @@
 
     <div class="form-card">
       <h3>Envie sua mensagem</h3>
-      <form id="contactForm">
+      <form id="contactForm" name="contato" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contato">
+        <input type="hidden" name="bot-field" style="display:none">
         <div class="form-row">
           <div class="field">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" required placeholder="Seu nome completo">
+            <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
           </div>
           <div class="field">
             <label for="telefone">Telefone / WhatsApp</label>
-            <input type="tel" id="telefone" required placeholder="(19) 90000-0000">
+            <input type="tel" id="telefone" name="telefone" required placeholder="(19) 90000-0000">
           </div>
         </div>
         <div class="field">
           <label for="assunto">Área de interesse</label>
-          <select id="assunto">
+          <select id="assunto" name="assunto">
             <option>Cuidados pré, peri e pós-parto</option>
             <option>Orientação em amamentação</option>
             <option>Dores pélvicas e na relação sexual</option>
@@ -748,10 +750,10 @@
         </div>
         <div class="field">
           <label for="mensagem">Mensagem</label>
-          <textarea id="mensagem" placeholder="Conte um pouco sobre o que você procura..."></textarea>
+          <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o que você procura..."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:14px;">Enviar pelo WhatsApp</button>
-        <p class="form-note">Ao enviar, você será direcionada ao WhatsApp com sua mensagem já preenchida.</p>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:14px;">Enviar mensagem</button>
+        <p class="form-note">Suas informações são tratadas com privacidade e sigilo.</p>
       </form>
     </div>
   </div>
@@ -829,13 +831,31 @@
 
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    const nome = document.getElementById("nome").value.trim();
-    const tel  = document.getElementById("telefone").value.trim();
-    const ass  = document.getElementById("assunto").value;
-    const msg  = document.getElementById("mensagem").value.trim();
-    let text = `Olá, Simone! Me chamo ${nome}.\nTelefone: ${tel}\nÁrea de interesse: ${ass}`;
-    if (msg) text += `\nMensagem: ${msg}`;
-    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, "_blank");
+    const form = this;
+    const btn = form.querySelector("button[type=submit]");
+    const original = btn.textContent;
+    btn.textContent = "Enviando...";
+    btn.disabled = true;
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+    .then(() => {
+      form.reset();
+      btn.textContent = "✓ Mensagem enviada!";
+      btn.style.background = "var(--verde-deep)";
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = "";
+        btn.disabled = false;
+      }, 4000);
+    })
+    .catch(() => {
+      btn.textContent = "Erro ao enviar. Tente pelo WhatsApp.";
+      btn.disabled = false;
+    });
   });
 
   // Header scroll

@@ -5,6 +5,23 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.6.0] - 2026-09-24
+### Alterado
+- Título da aba do browser: "Simone | Fisioterapia" (era o nome completo + especialidade)
+- Formulário de contato migrado de WhatsApp redirect para **Netlify Forms** (envio por e-mail)
+  - Adicionados atributos `name="contato"` e `data-netlify="true"` no `<form>`
+  - Adicionado honeypot anti-spam (`data-netlify-honeypot="bot-field"`)
+  - Todos os campos receberam atributo `name` para captura correta pelo Netlify
+  - Handler JS reescrito: faz POST assíncrono, exibe confirmação visual "✓ Mensagem enviada!" e reseta o formulário
+  - Fallback no erro: sugere contato pelo WhatsApp
+  - Texto do botão atualizado: "Enviar mensagem" (era "Enviar pelo WhatsApp")
+  - Nota de rodapé do formulário atualizada para mensagem de privacidade
+
+### Pendente
+- Ativar notificação por e-mail no Netlify: **fukufisio → Forms → Form notifications → Add notification → Email** → destinatário: simonefukufisio@gmail.com
+
+---
+
 ## [1.5.0] - 2026-09-23
 ### Adicionado — SEO e Analytics
 - **Google Analytics 4** integrado (`G-YCW4MYYGL5`) no `<head>`
