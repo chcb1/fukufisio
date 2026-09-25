@@ -723,6 +723,7 @@
       <form id="contactForm" name="contato" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contato">
         <input type="hidden" name="bot-field" style="display:none">
+        <input type="hidden" name="subject" id="emailSubject" value="Nova mensagem pelo site">
         <div class="form-row">
           <div class="field">
             <label for="nome">Nome</label>
@@ -832,8 +833,14 @@
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const form = this;
-    const btn = form.querySelector("button[type=submit]");
-    const original = btn.textContent;
+    const btn  = form.querySelector("button[type=submit]");
+    const nome    = document.getElementById("nome").value.trim();
+    const assunto = document.getElementById("assunto").value;
+
+    // Subject dinâmico com nome + serviço selecionado
+    document.getElementById("emailSubject").value =
+      `[Site] ${assunto} — ${nome}`;
+
     btn.textContent = "Enviando...";
     btn.disabled = true;
 
@@ -843,17 +850,37 @@
       body: new URLSearchParams(new FormData(form)).toString()
     })
     .then(() => {
-      form.reset();
-      btn.textContent = "✓ Mensagem enviada!";
-      btn.style.background = "var(--verde-deep)";
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.style.background = "";
-        btn.disabled = false;
-      }, 4000);
+      // Substitui o formulário por mensagem de confirmação
+      form.innerHTML = `
+        <div style="text-align:center;padding:32px 16px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-soft);
+               display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                 stroke="var(--verde-deep)" stroke-width="2" stroke-linecap="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3 style="font-size:19px;margin-bottom:10px;font-family:var(--ff-b);font-weight:700;">
+            Mensagem recebida!
+          </h3>
+          <p style="color:var(--ink-2);font-size:14.5px;max-width:34ch;margin:0 auto;line-height:1.7;">
+            Obrigada pelo contato, <strong>${nome}</strong>.<br>
+            Entraremos em contato em breve para dar continuidade ao seu atendimento.
+          </p>
+          <p style="margin-top:18px;font-size:13px;color:var(--ink-3);">
+            Precisa de resposta rápida?
+            <a href="#" id="successWaLink" style="color:var(--rosa-deep);font-weight:600;">
+              Fale pelo WhatsApp
+            </a>
+          </p>
+        </div>`;
+      // Reatribui o link do WA no estado de sucesso
+      const wa = document.getElementById("successWaLink");
+      if (wa) wa.href = `https://wa.me/5519991255241?text=${encodeURIComponent("Olá, Simone! Acabei de enviar uma mensagem pelo site.")}`;
     })
     .catch(() => {
       btn.textContent = "Erro ao enviar. Tente pelo WhatsApp.";
+      btn.style.background = "var(--rosa-deep)";
       btn.disabled = false;
     });
   });

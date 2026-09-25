@@ -5,6 +5,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.7.0] - 2026-09-24
+### Melhorado — Formulário de contato
+- Subject do e-mail dinâmico: `[Site] {serviço selecionado} — {nome}` (ex: "[Site] Pós-cirúrgico — Ana Paula")
+- Após envio, formulário substituído por mensagem de confirmação inline com ícone verde
+- Mensagem de confirmação inclui o nome da paciente e texto acolhedor
+- Fallback no estado de sucesso: link direto para WhatsApp caso precise de resposta rápida
+- Tratamento de erro mantido com sugestão de contato pelo WhatsApp
+
+---
+
 ## [1.6.0] - 2026-09-24
 ### Alterado
 - Título da aba do browser: "Simone | Fisioterapia" (era o nome completo + especialidade)
