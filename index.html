@@ -837,6 +837,34 @@
     if (el) el.href = WA_URL;
   });
 
+  // ── Rastreamento de conversões (GA4) ──
+  function track(evento, params) {
+    if (typeof gtag === "function") gtag("event", evento, params || {});
+  }
+  const ORIGEM_POR_ID = {
+    heroWaBtn: "hero",
+    floatWaBtn: "botao_flutuante",
+    infoWaLink: "contato",
+    footerWaLink: "rodape",
+    successWaLink: "pos_formulario"
+  };
+  function origemDoLink(a) {
+    if (ORIGEM_POR_ID[a.id]) return ORIGEM_POR_ID[a.id];
+    if (a.closest("footer")) return "rodape";
+    if (a.closest("#contato")) return "contato";
+    return "outro";
+  }
+  // Delegação: cobre também links criados dinamicamente (ex.: pós-formulário)
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a[href]");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    const origem = origemDoLink(a);
+    if (href.includes("wa.me"))           track("clique_whatsapp", { origem });
+    else if (href.startsWith("mailto:"))  track("clique_email", { origem });
+    else if (href.includes("instagram.com")) track("clique_instagram", { origem });
+  });
+
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const form = this;
@@ -856,7 +884,10 @@
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(new FormData(form)).toString()
     })
-    .then(() => {
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      track("envio_formulario", { servico: assunto });
+      const nomeSeguro = nome.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
       // Substitui o formulário por mensagem de confirmação
       form.innerHTML = `
         <div style="text-align:center;padding:32px 16px;">
@@ -871,12 +902,12 @@
             Mensagem recebida!
           </h3>
           <p style="color:var(--ink-2);font-size:14.5px;max-width:34ch;margin:0 auto;line-height:1.7;">
-            Obrigada pelo contato, <strong>${nome}</strong>.<br>
+            Obrigada pelo contato, <strong>${nomeSeguro}</strong>.<br>
             Entraremos em contato em breve para dar continuidade ao seu atendimento.
           </p>
           <p style="margin-top:18px;font-size:13px;color:var(--ink-3);">
             Precisa de resposta rápida?
-            <a href="#" id="successWaLink" style="color:var(--rosa-deep);font-weight:600;">
+            <a href="#" id="successWaLink" target="_blank" rel="noopener" style="color:var(--rosa-deep);font-weight:600;">
               Fale pelo WhatsApp
             </a>
           </p>
@@ -886,6 +917,7 @@
       if (wa) wa.href = `https://wa.me/5519991255241?text=${encodeURIComponent("Olá, Simone! Acabei de enviar uma mensagem pelo site.")}`;
     })
     .catch(() => {
+      track("erro_formulario", { servico: assunto });
       btn.textContent = "Erro ao enviar. Tente pelo WhatsApp.";
       btn.style.background = "var(--rosa-deep)";
       btn.disabled = false;

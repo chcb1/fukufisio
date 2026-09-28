@@ -5,6 +5,24 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.8.0] - 2026-09-28
+### Adicionado — Medição de conversões (GA4)
+- Evento `clique_whatsapp` com parâmetro `origem` (hero, botao_flutuante, contato, rodape, pos_formulario)
+- Evento `envio_formulario` com parâmetro `servico` (serviço selecionado no formulário)
+- Eventos `clique_email` e `clique_instagram` com parâmetro `origem`
+- Evento `erro_formulario` para monitorar falhas de envio
+- Rastreamento por delegação de clique: cobre também links criados dinamicamente
+
+### Corrigido
+- Formulário exibia "Mensagem recebida!" mesmo quando o Netlify respondia com erro HTTP; agora só confirma com resposta 2xx
+- Nome digitado no formulário é escapado antes de aparecer na mensagem de confirmação
+- Link do WhatsApp na confirmação agora abre em nova aba
+
+### Interface
+- Seta customizada no campo "Área de interesse" para indicar que é uma lista de opções (entregue anteriormente, sem registro)
+
+---
+
 ## [1.7.0] - 2026-09-24
 ### Melhorado — Formulário de contato
 - Subject do e-mail dinâmico: `[Site] {serviço selecionado} — {nome}` (ex: "[Site] Pós-cirúrgico — Ana Paula")
