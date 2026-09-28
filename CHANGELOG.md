@@ -5,6 +5,19 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.9.0] - 2026-09-28
+### SEO
+- Título da página: "Fisioterapeuta Dermatofuncional e Saúde da Mulher — Campinas" (60 caracteres, cabe inteiro no resultado do Google; era "Simone | Fisioterapia", sem palavras-chave)
+- H1 passa a incluir a linha de especialidade ("Fisioterapeuta Dermatofuncional e Especialista em Saúde da Mulher — Campinas") junto à frase principal, sem mudança visual
+- Os 9 cards de serviço agora estão escritos direto no HTML, em vez de gerados por JavaScript, e ficam legíveis para o Google sem depender de execução de script
+- Títulos dos cards passaram de `<h4>` para `<h3>`, respeitando a hierarquia sob o `<h2>` da seção (mesmo estilo visual)
+
+### Validação
+- Comparação de capturas antes/depois em desktop e mobile: diferença máxima de 1px
+- Eventos do GA4 retestados após a mudança
+
+---
+
 ## [1.8.0] - 2026-09-28
 ### Adicionado — Medição de conversões (GA4)
 - Evento `clique_whatsapp` com parâmetro `origem` (hero, botao_flutuante, contato, rodape, pos_formulario)
