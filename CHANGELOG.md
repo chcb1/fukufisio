@@ -5,6 +5,17 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.9.1] - 2026-09-28
+### Corrigido — domínio canônico
+- O domínio principal no Netlify é `simonefukufisio.com.br` (sem www); `www` redireciona para ele. O site declarava o `www` como canônico, apontando para um endereço que redireciona, e o Search Console marcou o `www` como "Página com redirecionamento"
+- Canonical, `og:url`, `og:image`, `twitter:image` e os dados estruturados (Schema.org) agora usam `https://simonefukufisio.com.br/`
+- `sitemap.xml` e `robots.txt` atualizados para o domínio sem www (`lastmod` 2026-09-28)
+
+### Ação manual pós-deploy
+- Search Console: remover o sitemap antigo (com www) e enviar `https://simonefukufisio.com.br/sitemap.xml`
+
+---
+
 ## [1.9.0] - 2026-09-28
 ### SEO
 - Título da página: "Fisioterapeuta Dermatofuncional e Saúde da Mulher — Campinas" (60 caracteres, cabe inteiro no resultado do Google; era "Simone | Fisioterapia", sem palavras-chave)
