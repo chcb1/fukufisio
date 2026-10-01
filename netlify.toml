@@ -6,13 +6,27 @@
 [build]
   publish = "."      # raiz do repo — sem build step, site estático puro
 
-# ── Cache agressivo para assets versionados (imagens, etc.)
+# ── Imagens: cache de 1 ano.
+#    REGRA: nunca substituir uma imagem mantendo o mesmo nome de arquivo.
+#    Imagem nova = nome novo (ex.: foto-2027.jpg) + atualizar a referência no HTML.
+#    Com o mesmo nome, quem já visitou o site continua vendo a imagem antiga.
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# ── Cache curto para o HTML (sempre busca versão nova)
+# ── CSS e JS: sempre revalidados, para que mudanças cheguem a todos na hora
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ── HTML: sempre revalidado (é também o padrão do Netlify para as subpáginas)
 [[headers]]
   for = "/"
   [headers.values]
@@ -32,10 +46,6 @@
     Referrer-Policy          = "strict-origin-when-cross-origin"
     Permissions-Policy       = "camera=(), microphone=(), geolocation=()"
 
-# ── Redirecionar www → apex (após conectar domínio customizado)
-# Descomente quando o domínio simonefukufisio.com.br estiver configurado:
-# [[redirects]]
-#   from  = "https://www.simonefukufisio.com.br/*"
-#   to    = "https://simonefukufisio.com.br/:splat"
-#   status = 301
-#   force  = true
+# ── Domínio: o principal é simonefukufisio.com.br (sem www).
+#    O redirecionamento de www para ele é feito pelo Netlify em Domain management;
+#    não é necessária regra aqui.

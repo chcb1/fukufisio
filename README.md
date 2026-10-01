@@ -1,14 +1,16 @@
-# Simone Fuku — Fisioterapia Pélvica
-**Site institucional** · Campinas, SP  
-`simonefukufisio` | [@simonefukufisio](https://instagram.com/simonefukufisio)
+# Simone Fukushima De Paula — Fisioterapia
+**Site institucional** · Campinas, SP
+https://simonefukufisio.com.br · [@simonefukufisio](https://instagram.com/simonefukufisio)
 
 ---
 
 ## Visão geral
 
-Site institucional de uma página (single-page) para clínica de fisioterapia especializada em saúde pélvica. Desenvolvido como HTML/CSS/JS puro, sem dependências de framework, build step ou servidor — deploy direto via Netlify.
+Site institucional de uma clínica de fisioterapia especializada em saúde da mulher. HTML, CSS e JavaScript puros, sem framework, sem etapa de build e sem servidor. Publicado pelo Netlify a cada `git push`.
 
-**Objetivo principal:** conversão de visitantes em leads via WhatsApp e formulário de contato.
+**Objetivo:** transformar visitas em contatos, pelo WhatsApp e pelo formulário.
+
+> ⚠️ **Este repositório é público.** Nunca incluir senhas, chaves, lista de contas e acessos, ou dados de pacientes. O planejamento e o roteiro de segurança ficam no ClickUp (privado).
 
 ---
 
@@ -16,174 +18,119 @@ Site institucional de uma página (single-page) para clínica de fisioterapia es
 
 ```
 fukufisio/
-│
-├── index.html          # Página única — todo o site está aqui
-│
+├── index.html            # Página inicial
+├── 404.html              # Página de erro (endereço não encontrado)
+├── css/
+│   └── styles.css        # Estilos compartilhados por todas as páginas
+├── js/
+│   └── site.js           # Script compartilhado: GA4, WhatsApp, formulário, menu
 ├── assets/
-│   ├── logo.png        # Logo com fundo transparente (222×245 px)
-│   └── photo.jpg       # Foto profissional, crop 4:5 (720×900 px)
-│
-├── netlify.toml        # Config de build, cache e headers de segurança
-├── .gitignore
+│   ├── logo.png
+│   └── simone-fukushima-fisioterapeuta.jpg
+├── sitemap.xml           # Lista de páginas para o Google
+├── robots.txt
+├── netlify.toml          # Cache e cabeçalhos de segurança
+├── CHANGELOG.md          # Histórico de versões
 └── README.md
 ```
 
-> **Regra de ouro:** qualquer alteração de conteúdo acontece em `index.html`.  
-> Troca de imagens: substitua o arquivo em `assets/` mantendo o mesmo nome.
+Páginas de serviço futuras seguem o padrão `nome-do-servico/index.html`, por exemplo `fisioterapia-pelvica/index.html`, publicada em `/fisioterapia-pelvica/`.
+
+---
+
+## Regras de manutenção
+
+1. **Caminhos sempre a partir da raiz:** `/css/styles.css`, `/js/site.js`, `/assets/...`, `/#contato`. Assim funcionam em qualquer subpágina.
+2. **Cabeçalho e rodapé são copiados em cada página.** Estão entre os marcadores `<!-- COMPARTILHADO:CABECALHO:INICIO/FIM -->` e `<!-- COMPARTILHADO:RODAPE:INICIO/FIM -->`. Ao mudar um, mudar em todas as páginas.
+3. **Imagem nova = nome de arquivo novo.** As imagens em `/assets/` ficam em cache por 1 ano no navegador. Substituir o arquivo mantendo o nome faz quem já visitou continuar vendo a imagem antiga. Antes de subir, reduzir para no máximo ~900 px de largura e ~200 KB.
+4. **Sem estilos nem scripts dentro do HTML.** Estilo vai em `css/styles.css`, comportamento em `js/site.js`. A única exceção são os dados estruturados (`application/ld+json`).
+5. **Endereço oficial: `https://simonefukufisio.com.br/` (sem www).** Usar sempre esse em canonical, sitemap e links.
+6. **Toda página nova** precisa de: `<title>` até 60 caracteres, meta description, canonical, um `<h1>`, entrada no `sitemap.xml` e registro no `CHANGELOG.md`.
+7. **Conteúdo clínico** é revisado pela Simone antes de publicar, sem promessa de resultado (Código de Ética do COFFITO).
 
 ---
 
 ## Stack técnica
 
-| Camada | Tecnologia | Observação |
-|--------|------------|------------|
-| Marcação | HTML5 semântico | Single-file, sem template engine |
-| Estilo | CSS3 puro — Custom Properties (`var()`) | Sem Tailwind, Bootstrap ou pre-processador |
-| Interatividade | JavaScript vanilla (ES6+) | Sem jQuery, sem bundler |
-| Tipografia | Google Fonts — **Fraunces** (display serifada) + **Work Sans** (corpo) | Carregadas via CDN, fallbacks definidos |
-| Ícones | SVG inline | Sem biblioteca de ícones externa |
-| Formulário | Vanilla JS → monta mensagem → abre WhatsApp | Complementar: Netlify Forms (ver seção abaixo) |
-| Hospedagem | [Netlify](https://netlify.com) — free tier | Deploy automático via GitHub |
-| CI/CD | GitHub Actions implícito via Netlify | Push na `main` → deploy automático |
-
-**Dependências de produção: zero.** O site não carrega nenhuma biblioteca JS em runtime.
+| Camada | Tecnologia |
+|--------|------------|
+| Marcação | HTML5 semântico |
+| Estilo | CSS puro com variáveis (`:root`) |
+| Comportamento | JavaScript puro, sem dependências |
+| Tipografia | Google Fonts: Fraunces (títulos) + Work Sans (texto) |
+| Formulário | Netlify Forms (envio por e-mail) |
+| Medição | Google Analytics 4 |
+| Hospedagem | Netlify, plano gratuito, deploy automático via GitHub |
 
 ---
 
-## Seções do site
+## Integrações
 
-| Seção | ID / âncora | Descrição |
-|-------|-------------|-----------|
-| Header fixo | `#top` | Logo, navegação, CTA "Agendar consulta" |
-| Hero | — | Headline, foto profissional, métricas de confiança |
-| Sobre | `#sobre` | Card da fisioterapeuta + diferenciais em pills |
-| Serviços | `#servicos` | Grid de 8 especialidades |
-| Jornada | `#jornada` | Timeline pré / peri / pós-parto |
-| Diferenciais | — | 4 pilares do atendimento |
-| Contato | `#contato` | Formulário + informações de contato |
-| Footer | — | Links, redes sociais, rodapé legal |
-| WhatsApp flutuante | — | Botão fixo, presente em todas as telas |
-
----
-
-## Integração WhatsApp
-
-O número está definido em uma única constante no `<script>` ao final do `index.html`:
+### WhatsApp
+O número fica em um único lugar, em `js/site.js`:
 
 ```javascript
-const WA_NUMBER = "5519991255241"; // 55 (Brasil) + 19 (DDD) + número
+var WA = "5519991255241"; // 55 (Brasil) + 19 (DDD) + número
 ```
 
-Para alterar o número: edite apenas essa linha. Todos os botões e o formulário usam essa variável.
-
-O formulário monta uma mensagem personalizada com nome, telefone, área de interesse e observações antes de abrir o WhatsApp.
-
----
-
-## Netlify Forms (recomendado ativar)
-
-Permite capturar leads mesmo quando o WhatsApp não abre (desktop sem app, iOS bloqueado). Sem backend, sem custo adicional no free tier (100 submissões/mês).
-
-**Para ativar,** localize o `<form>` em `index.html` e adicione dois atributos:
+Em páginas novas, qualquer link vira botão de WhatsApp com dois atributos:
 
 ```html
-<!-- ANTES -->
-<form id="contactForm">
-
-<!-- DEPOIS -->
-<form id="contactForm" name="contato" data-netlify="true">
+<a data-wa="Olá, Simone! Quero saber sobre fisioterapia pélvica."
+   data-origem="pagina_pelvica" href="/#contato" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
 ```
 
-Após o deploy, as submissões aparecem em **Netlify → Forms → contato**.  
-Configure notificação por e-mail em: **Site settings → Forms → Form notifications**.
+`data-wa` é a mensagem que já vai preenchida. `data-origem` identifica o botão no GA4.
+
+### Google Analytics 4 (`G-YCW4MYYGL5`)
+
+| Evento | Parâmetro | Quando dispara |
+|---|---|---|
+| `clique_whatsapp` | `origem` | Clique em qualquer link do WhatsApp |
+| `envio_formulario` | `servico` | Formulário enviado com sucesso |
+| `clique_email` / `clique_instagram` | `origem` | Clique em e-mail ou Instagram |
+| `erro_formulario` | `servico` | Falha no envio do formulário |
+
+`clique_whatsapp` e `envio_formulario` são eventos principais (conversões) no GA4.
+
+### Formulário (Netlify Forms)
+Formulário `contato` na página inicial. As mensagens chegam por e-mail e ficam em **Netlify → Forms**. Limite do plano gratuito: 100 envios por mês.
+
+### Google Search Console
+Propriedade de domínio verificada por registro DNS TXT, criado em **Netlify → DNS**. Não apagar esse registro.
 
 ---
 
-## Deploy e fluxo de trabalho
+## Publicação
 
-### Primeiro deploy
-
-```bash
-# 1. Clone o repo (ou faça o push inicial)
-git clone https://github.com/chcb1/fukufisio.git
-cd fukufisio
-
-# 2. No Netlify: New site → Import from Git → GitHub → chcb1/fukufisio
-#    Build command: (deixar em branco)
-#    Publish directory: .
-#    Branch: main
-```
-
-### Publicar uma alteração
+O Netlify publica automaticamente a branch `main`.
 
 ```bash
-# Edite o index.html (ou substitua um asset em assets/)
 git add .
-git commit -m "feat: adicionar depoimentos"
-git push origin main
-# → Netlify detecta o push e faz deploy automático em ~20s
+git commit -m "tipo: descrição curta"
+git push
 ```
 
-### Branches recomendadas
+**Mudanças maiores** (página nova, alteração de estrutura): usar uma branch e abrir um pull request. O Netlify gera um **link de pré-visualização** para revisar antes de publicar.
 
-| Branch | Uso |
-|--------|-----|
-| `main` | Produção — deploy automático |
-| `dev` ou `feature/*` | Desenvolvimento — gera preview URL no Netlify |
+```bash
+git checkout -b nome-da-mudanca
+# ...alterações...
+git push -u origin nome-da-mudanca
+# abrir o pull request no GitHub; depois de aprovado, fazer o merge na main
+```
 
----
+**Voltar a uma versão anterior:** Netlify → Deploys → escolher o deploy → **Publish deploy**.
 
-## Domínio customizado (pendente)
+**Pré-visualizar no computador:** os caminhos partem da raiz, então abrir o arquivo direto não carrega estilo nem script. Usar um servidor local:
 
-Domínio alvo: `simonefukufisio.com.br`
-
-**Passos:**
-1. Registrar em [registro.br](https://registro.br) (~R$ 40–50/ano)
-2. No Netlify: **Domain management → Add custom domain**
-3. No Registro.br: apontar nameservers para os da Netlify, ou criar registro CNAME/ALIAS
-4. SSL/HTTPS: gerado automaticamente pelo Netlify (Let's Encrypt) em até 24h
-
-Após configurar, descomentar o redirect `www → apex` no `netlify.toml`.
+```bash
+python3 -m http.server 8000
+# abrir http://localhost:8000
+```
 
 ---
 
-## SEO e Analytics (pendente)
+## Histórico
 
-Itens a adicionar em `index.html` antes do `</head>`:
-
-- [ ] **GA4** — tag `G-XXXXXXXXXX` (criar em analytics.google.com)
-- [ ] **Open Graph** — `og:title`, `og:description`, `og:image` para compartilhamento social
-- [ ] **Schema.org LocalBusiness** — para o Google exibir painel lateral com dados da clínica
-- [ ] **Google Search Console** — verificação de propriedade e indexação
-- [ ] **Google Business Profile** — cadastro gratuito, maior impacto em busca local
-
----
-
-## Conteúdo pendente (próximas atualizações)
-
-- [ ] Depoimentos de pacientes (com autorização)
-- [ ] Credenciais e formação da Simone (COFFITO, especializações)
-- [ ] Endereço ou bairro de atendimento (impacta SEO local)
-- [ ] FAQ resumido sobre fisioterapia pélvica
-- [ ] Fotos do consultório
-
----
-
-## Contatos do projeto
-
-| Canal | Dado |
-|-------|------|
-| WhatsApp | (19) 99125-5241 |
-| E-mail | simonefukufisio@gmail.com |
-| Instagram | [@simonefukufisio](https://instagram.com/simonefukufisio) |
-| Cidade | Campinas, SP |
-
----
-
-## Histórico de versões
-
-| Versão | Data | Descrição |
-|--------|------|-----------|
-| 1.0.0 | Jul 2026 | Site inicial — hero, serviços, contato, WhatsApp |
-| 1.1.0 | Jul 2026 | Instagram e e-mail adicionados; logo e foto integrados |
-| 1.2.0 | Set 2026 | Refatoração: imagens separadas de base64, repo estruturado |
+Ver [CHANGELOG.md](CHANGELOG.md).
