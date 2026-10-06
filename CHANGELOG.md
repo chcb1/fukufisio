@@ -5,6 +5,39 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.10.0] - 2026-10-01
+### Estrutura multipágina (Fase 0)
+Prepara o site para receber páginas de serviço. Sem mudança visual no desktop.
+- Estilos movidos de dentro do `index.html` para `css/styles.css`, compartilhado entre páginas
+- Script movido para `js/site.js`, compartilhado; cada bloco verifica se o elemento existe, para funcionar em páginas sem formulário
+- Inicialização do GA4 movida para `js/site.js`; nenhum script ou estilo inline restante no HTML (exceto dados estruturados)
+- Caminhos passam a partir da raiz (`/css/`, `/js/`, `/assets/`, `/#contato`), para funcionar em subpáginas
+- Novo padrão para botões de WhatsApp em qualquer página: atributos `data-wa` (mensagem) e `data-origem` (identificação no GA4)
+- Marcadores `COMPARTILHADO:CABECALHO` e `COMPARTILHADO:RODAPE` delimitam os blocos repetidos em cada página
+- Nova página `404.html`, com o mesmo cabeçalho e rodapé, e `noindex`
+- `netlify.toml`: CSS e JS sempre revalidados; regra de nomes de imagem documentada; comentário obsoleto sobre redirecionamento de www removido
+- `README.md` reescrito com a estrutura atual e as regras de manutenção
+
+### Ambientes de teste e produção
+- O script distingue **produção** (domínio `simonefukufisio.com.br`) de **teste** (pré-visualização do Netlify ou servidor local)
+- Em teste: o Google Analytics não recebe dados, os e-mails do formulário saem com `[TESTE]` no assunto, a página pede para não ser indexada e um selo "Ambiente de teste" aparece no canto da tela
+- Os eventos do GA4 em teste são listados no console do navegador, para conferência
+
+### Corrigido
+- **Menu no celular não aparecia** desde a v1.4.0: a regra que escondia o botão "Agendar consulta" escondia junto o botão de menu. No celular, o cabeçalho mostrava só o logo, sem navegação
+- Menu do celular: abre e fecha pelo botão, fecha ao tocar num link ou com a tecla Esc; texto do botão "Agendar consulta" legível (branco sobre rosa)
+
+### Desempenho
+- Foto do topo reduzida de **1.213 KB para 156 KB** (1974×2705 → 900×1233), mesmo enquadramento. Renomeada para `simone-fukushima-fisioterapeuta.jpg`, o que também renova o cache de quem já visitou
+- Dimensões declaradas nas imagens, para a página não "pular" durante o carregamento
+
+### Validação
+- Comparação de capturas antes/depois, seção por seção: desktop idêntico, exceto a área da foto (nova compressão); celular idêntico, exceto o botão de menu, que agora aparece
+- Eventos do GA4 e formulário (sucesso e erro) retestados em navegador real
+- Menu do celular e página 404 testados
+
+---
+
 ## [1.9.1] - 2026-09-28
 ### Corrigido — domínio canônico
 - O domínio principal no Netlify é `simonefukufisio.com.br` (sem www); `www` redireciona para ele. O site declarava o `www` como canônico, apontando para um endereço que redireciona, e o Search Console marcou o `www` como "Página com redirecionamento"
