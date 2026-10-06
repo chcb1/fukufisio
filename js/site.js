@@ -3,14 +3,37 @@
 (function () {
   "use strict";
 
+  // ── Ambiente ────────────────────────────────────────────────────────
+  // Produção é apenas o domínio oficial. Qualquer outro endereço (pré-visualização
+  // do Netlify, servidor local) é tratado como TESTE: não envia dados ao Analytics,
+  // marca os e-mails do formulário com [TESTE] e pede para não ser indexado.
+  var GA_ID = "G-YCW4MYYGL5";
+  var HOSTS_PRODUCAO = ["simonefukufisio.com.br", "www.simonefukufisio.com.br"];
+  var PRODUCAO = HOSTS_PRODUCAO.indexOf(window.location.hostname) !== -1;
+
+  if (!PRODUCAO) {
+    window["ga-disable-" + GA_ID] = true; // chave oficial do Google para desligar o envio
+
+    var robots = document.createElement("meta");
+    robots.name = "robots";
+    robots.content = "noindex, nofollow";
+    document.head.appendChild(robots);
+
+    var aviso = document.createElement("div");
+    aviso.className = "aviso-teste";
+    aviso.textContent = "Ambiente de teste";
+    document.body.appendChild(aviso);
+  }
+
   // ── Google Analytics 4 ──────────────────────────────────────────────
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = gtag;
   gtag("js", new Date());
-  gtag("config", "G-YCW4MYYGL5");
+  gtag("config", GA_ID);
 
   function track(evento, params) {
+    if (!PRODUCAO && window.console) console.info("[teste] evento GA4 (não enviado):", evento, params || {});
     gtag("event", evento, params || {});
   }
 
@@ -71,8 +94,9 @@
       var nome = document.getElementById("nome").value.trim();
       var assunto = document.getElementById("assunto").value;
 
-      // Assunto do e-mail: serviço + nome
-      document.getElementById("emailSubject").value = "[Site] " + assunto + " — " + nome;
+      // Assunto do e-mail: serviço + nome (com marca [TESTE] fora da produção)
+      document.getElementById("emailSubject").value =
+        (PRODUCAO ? "" : "[TESTE] ") + "[Site] " + assunto + " — " + nome;
 
       btn.textContent = "Enviando...";
       btn.disabled = true;

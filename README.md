@@ -120,6 +120,20 @@ git push -u origin nome-da-mudanca
 # abrir o pull request no GitHub; depois de aprovado, fazer o merge na main
 ```
 
+### Ambientes
+
+| Ambiente | Endereço | Como é publicado |
+|---|---|---|
+| **Produção** | `simonefukufisio.com.br` | Merge na branch `main` |
+| **Teste** | `deploy-preview-N--simonefukufisio.netlify.app` | Pull request aberto no GitHub |
+
+Fora do domínio oficial, o `js/site.js` trata a página como teste:
+- não envia dados ao Google Analytics (os eventos aparecem no console do navegador);
+- marca o assunto dos e-mails do formulário com `[TESTE]`;
+- pede para não ser indexada e mostra o selo "Ambiente de teste".
+
+O envio de teste do formulário ainda conta na cota mensal do Netlify e chega por e-mail, com a marca `[TESTE]`.
+
 **Voltar a uma versão anterior:** Netlify → Deploys → escolher o deploy → **Publish deploy**.
 
 **Pré-visualizar no computador:** os caminhos partem da raiz, então abrir o arquivo direto não carrega estilo nem script. Usar um servidor local:

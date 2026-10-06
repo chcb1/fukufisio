@@ -18,6 +18,11 @@ Prepara o site para receber páginas de serviço. Sem mudança visual no desktop
 - `netlify.toml`: CSS e JS sempre revalidados; regra de nomes de imagem documentada; comentário obsoleto sobre redirecionamento de www removido
 - `README.md` reescrito com a estrutura atual e as regras de manutenção
 
+### Ambientes de teste e produção
+- O script distingue **produção** (domínio `simonefukufisio.com.br`) de **teste** (pré-visualização do Netlify ou servidor local)
+- Em teste: o Google Analytics não recebe dados, os e-mails do formulário saem com `[TESTE]` no assunto, a página pede para não ser indexada e um selo "Ambiente de teste" aparece no canto da tela
+- Os eventos do GA4 em teste são listados no console do navegador, para conferência
+
 ### Corrigido
 - **Menu no celular não aparecia** desde a v1.4.0: a regra que escondia o botão "Agendar consulta" escondia junto o botão de menu. No celular, o cabeçalho mostrava só o logo, sem navegação
 - Menu do celular: abre e fecha pelo botão, fecha ao tocar num link ou com a tecla Esc; texto do botão "Agendar consulta" legível (branco sobre rosa)
