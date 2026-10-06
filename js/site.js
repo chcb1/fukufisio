@@ -14,6 +14,9 @@
   if (!PRODUCAO) {
     window["ga-disable-" + GA_ID] = true; // chave oficial do Google para desligar o envio
 
+    // Mostra as pendências de conteúdo (blocos com data-pendente), ocultas em produção
+    document.documentElement.classList.add("ambiente-teste");
+
     var robots = document.createElement("meta");
     robots.name = "robots";
     robots.content = "noindex, nofollow";
@@ -66,6 +69,7 @@
     if (a.dataset.origem) return a.dataset.origem;
     if (ORIGEM_POR_ID[a.id]) return ORIGEM_POR_ID[a.id];
     if (a.closest("footer")) return "rodape";
+    if (a.closest(".avaliacoes-caixa")) return "secao_avaliacoes";
     if (a.closest("#contato")) return "contato";
     return "outro";
   }
@@ -78,6 +82,7 @@
     if (href.indexOf("wa.me") !== -1)              track("clique_whatsapp", { origem: origem });
     else if (href.indexOf("mailto:") === 0)        track("clique_email", { origem: origem });
     else if (href.indexOf("instagram.com") !== -1) track("clique_instagram", { origem: origem });
+    else if (href.indexOf("g.page/") !== -1)       track("clique_avaliacoes", { origem: origem });
   });
 
   // ── Formulário de contato (Netlify Forms) ───────────────────────────

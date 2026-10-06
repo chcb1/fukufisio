@@ -5,6 +5,20 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.11.0] - 2026-10-06
+### Avaliações do Google
+- Nova seção "O que dizem as pacientes" na página inicial, com link para ler as avaliações no Google e para deixar uma avaliação
+- Os textos das avaliações **não** são copiados para o site: ficam no Google, sempre atualizados, e o site não associa o nome de pacientes a um tipo de tratamento
+- Novo evento GA4 `clique_avaliacoes` (parâmetro `origem`)
+
+### Preparação para as páginas de serviço
+- `css/styles.css` e `js/site.js` já trazem os estilos das páginas de serviço e o mecanismo de pendências (`data-pendente`), ainda sem uso. As páginas entram na próxima versão, depois da revisão clínica
+
+### Acessibilidade
+- Contorno de foco visível em links e botões ao navegar pelo teclado
+
+---
+
 ## [1.10.0] - 2026-10-01
 ### Estrutura multipágina (Fase 0)
 Prepara o site para receber páginas de serviço. Sem mudança visual no desktop.
