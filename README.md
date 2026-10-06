@@ -47,6 +47,8 @@ Páginas de serviço futuras seguem o padrão `nome-do-servico/index.html`, por 
 5. **Endereço oficial: `https://simonefukufisio.com.br/` (sem www).** Usar sempre esse em canonical, sitemap e links.
 6. **Toda página nova** precisa de: `<title>` até 60 caracteres, meta description, canonical, um `<h1>`, entrada no `sitemap.xml` e registro no `CHANGELOG.md`.
 7. **Conteúdo clínico** é revisado pela Simone antes de publicar, sem promessa de resultado (Código de Ética do COFFITO).
+8. **Pendências de conteúdo** ficam em blocos com o atributo `data-pendente`. Aparecem destacados só no ambiente de teste e ficam ocultos em produção. Antes de publicar, substituir pelo texto definitivo ou remover o bloco.
+9. **Avaliações de pacientes** não são copiadas para o site. O site apenas aponta para o Google, para não associar o nome de pacientes a um tratamento.
 
 ---
 
@@ -89,6 +91,7 @@ Em páginas novas, qualquer link vira botão de WhatsApp com dois atributos:
 | `clique_whatsapp` | `origem` | Clique em qualquer link do WhatsApp |
 | `envio_formulario` | `servico` | Formulário enviado com sucesso |
 | `clique_email` / `clique_instagram` | `origem` | Clique em e-mail ou Instagram |
+| `clique_avaliacoes` | `origem` | Clique nos links de avaliações do Google |
 | `erro_formulario` | `servico` | Falha no envio do formulário |
 
 `clique_whatsapp` e `envio_formulario` são eventos principais (conversões) no GA4.
