@@ -5,23 +5,29 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
-## [1.11.0] - 2026-10-06
+## [1.12.0] - a publicar
 ### Páginas de serviço
 Cinco páginas novas, cada uma voltada a uma busca específica no Google:
 - `/fisioterapia-pelvica/`, `/incontinencia-urinaria/`, `/pos-parto/`, `/pos-cirurgico-estetico/`, `/drenagem-linfatica/`
-- Cada página tem título e descrição próprios, canonical, trilha de navegação (com dados estruturados `BreadcrumbList`), o que é, para quem é indicado, como é o atendimento, dúvidas frequentes, cartão da profissional com CREFITO e botões de WhatsApp com origem própria no GA4 (`pagina_*_topo`, `_lateral`, `_final`)
+- Cada página tem título e descrição próprios, canonical, trilha de navegação (com dados estruturados `BreadcrumbList`), o que é, para quem é indicado, como é o atendimento, dúvidas frequentes, cartão da profissional com CREFITO, link para as avaliações no Google e botões de WhatsApp com origem própria no GA4 (`pagina_*_topo`, `_lateral`, `_final`)
 - Texto informativo e geral, sem promessa de resultado. **Revisão clínica da Simone é obrigatória antes do merge**
 - Na página inicial, os cinco cards correspondentes viraram links ("Saiba mais"); o rodapé de todas as páginas ganhou a coluna "Atendimentos"
-- `sitemap.xml` com as seis URLs
+- `sitemap.xml` com as seis URLs (atualizar o `lastmod` para a data da publicação)
 
 ### Pendências de conteúdo (`data-pendente`)
 - Pontos que dependem da Simone ficam em blocos marcados com `data-pendente`. Aparecem destacados **só no ambiente de teste** e ficam ocultos em produção, como rede de segurança
-- Antes de publicar, cada bloco deve ser substituído pelo texto definitivo ou removido
+- O texto oculto continua no código-fonte: antes de publicar, cada bloco deve ser substituído pelo texto definitivo ou removido
 
+---
+
+## [1.11.0] - 2026-10-06
 ### Avaliações do Google
-- Nova seção "O que dizem as pacientes" na página inicial e em cada página de serviço, com link para ler as avaliações no Google e para deixar uma avaliação
+- Nova seção "O que dizem as pacientes" na página inicial, com link para ler as avaliações no Google e para deixar uma avaliação
 - Os textos das avaliações **não** são copiados para o site: ficam no Google, sempre atualizados, e o site não associa o nome de pacientes a um tipo de tratamento
 - Novo evento GA4 `clique_avaliacoes` (parâmetro `origem`)
+
+### Preparação para as páginas de serviço
+- `css/styles.css` e `js/site.js` já trazem os estilos das páginas de serviço e o mecanismo de pendências (`data-pendente`), ainda sem uso. As páginas entram na próxima versão, depois da revisão clínica
 
 ### Acessibilidade
 - Contorno de foco visível em links e botões ao navegar pelo teclado
