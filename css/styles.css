@@ -621,3 +621,25 @@ a.sc:hover .sc-mais { text-decoration:underline; }
   .passos li { padding:16px 16px 16px 56px; }
   .passos li::before { left:16px; }
 }
+
+/* ════════════════════════
+   FORMULÁRIO: ANTI-SPAM
+════════════════════════ */
+/* Armadilha para robôs: fora da tela para pessoas, visível para robôs que leem o HTML */
+.campo-oculto { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+.field .opcional { font-weight:400; color:var(--ink-3); }
+/* reCAPTCHA: o quadro do Google tem 304 px fixos; em telas estreitas é reduzido para caber */
+.form-captcha { margin:4px 0 14px; }
+.form-captcha:empty { display:none; }
+.contato-grid > * { min-width:0; }  /* o quadro de 304 px não pode alargar o cartão */
+@media (max-width:680px) { .form-row { row-gap:0; } }
+@media (max-width:420px) {
+  .form-captcha > div { transform:scale(0.84); transform-origin:0 0; height:66px; }
+}
+@media (max-width:374px) {
+  .form-captcha > div { transform:scale(0.74); height:58px; }
+}
+.form-erro {
+  margin:0 0 12px; padding:10px 12px; border-radius:var(--r-sm);
+  background:#fdecee; color:#8c2f43; font-size:13.5px; font-weight:600;
+}

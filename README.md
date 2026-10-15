@@ -99,6 +99,8 @@ Em páginas novas, qualquer link vira botão de WhatsApp com dois atributos:
 ### Formulário (Netlify Forms)
 Formulário `contato` na página inicial. As mensagens chegam por e-mail e ficam em **Netlify → Forms**. Limite do plano gratuito: 100 envios por mês.
 
+Proteção contra robôs: verificação reCAPTCHA v2 fornecida pelo Netlify (`data-netlify-recaptcha="true"` no `<form>` e na `<div class="form-captcha">`) e armadilha `bot-field`. O reCAPTCHA só aparece no site publicado ou na pré-visualização do Netlify, não no servidor local.
+
 ### Google Search Console
 Propriedade de domínio verificada por registro DNS TXT, criado em **Netlify → DNS**. Não apagar esse registro.
 

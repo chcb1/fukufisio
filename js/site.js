@@ -92,12 +92,28 @@
   }
 
   var form = document.getElementById("contactForm");
+  var erroForm = document.getElementById("formErro");
+  function mostrarErro(texto) {
+    if (!erroForm) return;
+    erroForm.textContent = texto;
+    erroForm.hidden = !texto;
+  }
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var btn = form.querySelector("button[type=submit]");
       var nome = document.getElementById("nome").value.trim();
       var assunto = document.getElementById("assunto").value;
+
+      // Verificação "Não sou um robô": o Netlify insere o reCAPTCHA na publicação e recusa
+      // envios sem ele. Aqui só avisamos a pessoa antes de enviar. Em servidor local o
+      // reCAPTCHA não existe e o campo não aparece, então o envio segue normalmente.
+      var captcha = form.querySelector('[name="g-recaptcha-response"]');
+      if (captcha && !captcha.value) {
+        mostrarErro("Marque a caixa “Não sou um robô” para enviar a mensagem.");
+        return;
+      }
+      mostrarErro("");
 
       // Assunto do e-mail: serviço + nome (com marca [TESTE] fora da produção)
       document.getElementById("emailSubject").value =
@@ -130,6 +146,7 @@
           track("erro_formulario", { servico: assunto });
           btn.textContent = "Erro ao enviar. Tente pelo WhatsApp.";
           btn.disabled = false;
+          if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset();
         });
     });
   }
