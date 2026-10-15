@@ -49,6 +49,7 @@ Páginas de serviço futuras seguem o padrão `nome-do-servico/index.html`, por 
 7. **Conteúdo clínico** é revisado pela Simone antes de publicar, sem promessa de resultado (Código de Ética do COFFITO).
 8. **Pendências de conteúdo** ficam em blocos com o atributo `data-pendente`. Aparecem destacados só no ambiente de teste e ficam ocultos em produção. Antes de publicar, substituir pelo texto definitivo ou remover o bloco.
 9. **Avaliações de pacientes** não são copiadas para o site. O site apenas aponta para o Google, para não associar o nome de pacientes a um tratamento.
+10. **Cores com contraste.** Texto pequeno e botões em rosa usam `--rosa-ink`; `--rosa-deep` fica para ícones, números e títulos grandes. Qualquer cor nova de texto precisa de contraste mínimo de 4,5:1 com o fundo.
 
 ---
 
