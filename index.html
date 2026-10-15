@@ -300,18 +300,23 @@
 
     <div class="form-card">
       <h3>Envie sua mensagem</h3>
-      <form id="contactForm" name="contato" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <form id="contactForm" name="contato" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
         <input type="hidden" name="form-name" value="contato">
-        <input type="hidden" name="bot-field">
+        <!-- Armadilha para robôs: campo invisível para pessoas. Se vier preenchido, o Netlify descarta a mensagem -->
+        <p class="campo-oculto" aria-hidden="true"><label>Não preencha este campo: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <input type="hidden" name="subject" id="emailSubject" value="Nova mensagem pelo site">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Seu nome completo">
+        </div>
         <div class="form-row">
           <div class="field">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="telefone" name="telefone" required autocomplete="tel" placeholder="(19) 90000-0000">
           </div>
           <div class="field">
-            <label for="telefone">Telefone / WhatsApp</label>
-            <input type="tel" id="telefone" name="telefone" required placeholder="(19) 90000-0000">
+            <label for="email">E-mail <span class="opcional">(opcional)</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@exemplo.com">
           </div>
         </div>
         <div class="field">
@@ -333,8 +338,11 @@
           <label for="mensagem">Mensagem</label>
           <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre o que você procura..."></textarea>
         </div>
+        <!-- Verificação "Não sou um robô" (reCAPTCHA do Google), inserida e validada pelo Netlify na publicação -->
+        <div class="form-captcha" data-netlify-recaptcha="true"></div>
+        <p class="form-erro" id="formErro" role="alert" hidden></p>
         <button type="submit" class="btn btn-primary btn-block">Enviar mensagem</button>
-        <p class="form-note">Suas informações são tratadas com privacidade e sigilo.</p>
+        <p class="form-note">Suas informações são tratadas com privacidade e sigilo. Formulário protegido pelo reCAPTCHA do Google.</p>
       </form>
     </div>
   </div>
