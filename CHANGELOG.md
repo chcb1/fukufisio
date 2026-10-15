@@ -7,12 +7,13 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ## [1.12.0] - a publicar
 ### Páginas de serviço
-Cinco páginas novas, cada uma voltada a uma busca específica no Google:
-- `/fisioterapia-pelvica/`, `/incontinencia-urinaria/`, `/pos-parto/`, `/pos-cirurgico-estetico/`, `/drenagem-linfatica/`
+Nove páginas novas, uma para cada serviço da página inicial, cada uma voltada a uma busca específica no Google:
+- `/fisioterapia-pelvica/`, `/incontinencia-urinaria/`, `/pos-parto/`, `/pos-cirurgico-estetico/`, `/drenagem-linfatica/` (06/10)
+- `/amamentacao/`, `/pos-cirurgico/` (ginecológico, obstétrico e de mama), `/laserterapia/`, `/estetica-intima/` (15/10)
 - Cada página tem título e descrição próprios, canonical, trilha de navegação (com dados estruturados `BreadcrumbList`), o que é, para quem é indicado, como é o atendimento, dúvidas frequentes, cartão da profissional com CREFITO, link para as avaliações no Google e botões de WhatsApp com origem própria no GA4 (`pagina_*_topo`, `_lateral`, `_final`)
 - Texto informativo e geral, sem promessa de resultado. **Revisão clínica da Simone é obrigatória antes do merge**
-- Na página inicial, os cinco cards correspondentes viraram links ("Saiba mais"); o rodapé de todas as páginas ganhou a coluna "Atendimentos"
-- `sitemap.xml` com as seis URLs (atualizar o `lastmod` para a data da publicação)
+- Na página inicial, os nove cards de serviço viraram links ("Saiba mais"); o rodapé de todas as páginas ganhou a coluna "Atendimentos"
+- `sitemap.xml` com as dez URLs (atualizar o `lastmod` para a data da publicação)
 
 ### Pendências de conteúdo (`data-pendente`)
 - Pontos que dependem da Simone ficam em blocos marcados com `data-pendente`. Aparecem destacados **só no ambiente de teste** e ficam ocultos em produção, como rede de segurança

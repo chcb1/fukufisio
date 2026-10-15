@@ -23,7 +23,11 @@ fukufisio/
 ├── incontinencia-urinaria/index.html
 ├── pos-parto/index.html
 ├── pos-cirurgico-estetico/index.html
-├── drenagem-linfatica/index.html # Páginas de serviço, publicadas em /nome/
+├── drenagem-linfatica/index.html
+├── amamentacao/index.html
+├── pos-cirurgico/index.html
+├── laserterapia/index.html
+├── estetica-intima/index.html    # Páginas de serviço, publicadas em /nome/
 ├── 404.html              # Página de erro (endereço não encontrado)
 ├── css/
 │   └── styles.css        # Estilos compartilhados por todas as páginas
