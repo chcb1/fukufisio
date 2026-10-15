@@ -18,7 +18,16 @@ Site institucional de uma clínica de fisioterapia especializada em saúde da mu
 
 ```
 fukufisio/
-├── index.html            # Página inicial
+├── index.html                    # Página inicial
+├── fisioterapia-pelvica/index.html
+├── incontinencia-urinaria/index.html
+├── pos-parto/index.html
+├── pos-cirurgico-estetico/index.html
+├── drenagem-linfatica/index.html
+├── amamentacao/index.html
+├── pos-cirurgico/index.html
+├── laserterapia/index.html
+├── estetica-intima/index.html    # Páginas de serviço, publicadas em /nome/
 ├── 404.html              # Página de erro (endereço não encontrado)
 ├── css/
 │   └── styles.css        # Estilos compartilhados por todas as páginas
@@ -34,7 +43,7 @@ fukufisio/
 └── README.md
 ```
 
-Páginas de serviço futuras seguem o padrão `nome-do-servico/index.html`, por exemplo `fisioterapia-pelvica/index.html`, publicada em `/fisioterapia-pelvica/`.
+Novas páginas de serviço seguem o mesmo padrão: `nome-do-servico/index.html`, publicada em `/nome-do-servico/`.
 
 ---
 
