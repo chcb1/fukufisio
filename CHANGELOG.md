@@ -5,7 +5,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
-## [1.11.1] - 2026-10-14
+## [1.11.3] - a publicar
 ### Revisão visual
 Ajustes de acabamento com base nos princípios de design da Apple (tipografia, contraste, resposta ao toque, simplicidade). Só `css/styles.css` mudou; nenhum texto, link ou evento foi alterado.
 
@@ -35,6 +35,21 @@ Ajustes de acabamento com base nos princípios de design da Apple (tipografia, c
 
 ### Pendente
 - O HTML dos ícones removidos ainda está no `index.html` (oculto pelo CSS). Limpar junto com a publicação das páginas de serviço, para não gerar conflito com o pull request #2
+
+---
+
+## [1.11.2] - 2026-10-15
+### Formulário: proteção contra robôs e campo de e-mail
+Motivo: mensagens de propaganda enviadas por ferramentas automáticas de prospecção (ex.: 11/10/2026). O assunto dessas mensagens vinha montado pelo script do site, ou seja, o robô usa um navegador de verdade e passava pela armadilha antiga.
+- **Verificação "Não sou um robô" (reCAPTCHA v2 do Google)**, fornecida e validada pelo próprio Netlify (`data-netlify-recaptcha`). Envios sem a verificação são recusados no servidor
+- Antes de enviar, o site avisa a pessoa se ela esqueceu de marcar a caixa
+- **Armadilha para robôs reforçada:** o campo `bot-field` deixou de ser `type="hidden"` (que muitos robôs ignoram) e virou um campo de texto fora da tela
+- **Novo campo E-mail (opcional).** Nas notificações do Netlify, o campo `email` costuma virar o endereço de resposta
+- Nome em linha própria; Telefone e E-mail lado a lado
+- No celular, o quadro do reCAPTCHA é reduzido para caber no cartão
+
+### Ação manual
+- No Netlify → Forms → `contato` → Spam submissions / Verified submissions: marcar as mensagens de propaganda como spam, para treinar o filtro do Netlify (Akismet)
 
 ---
 
