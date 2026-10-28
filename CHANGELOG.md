@@ -19,6 +19,14 @@ Nove páginas novas, uma para cada serviço da página inicial, cada uma voltada
 - Pontos que dependem da Simone ficam em blocos marcados com `data-pendente`. Aparecem destacados **só no ambiente de teste** e ficam ocultos em produção, como rede de segurança
 - O texto oculto continua no código-fonte: antes de publicar, cada bloco deve ser substituído pelo texto definitivo ou removido
 
+### Revisão clínica da Simone (28/10/2026)
+- Textos das 9 páginas revisados pela Simone em documento compartilhado; todas as pendências respondidas ou retiradas. Nenhum bloco `data-pendente` restante
+- Respostas incorporadas: duração e frequência das sessões, pedido médico, convênio e reembolso, início no pós-parto e no pós-operatório, atendimento domiciliar, recursos usados no pós-operatório, frequência da drenagem, intervalo do laser
+- "Orientação em amamentação" passa a se chamar **Consultoria em amamentação** (página, card da página inicial e opção do formulário)
+- Estética íntima restrita a **radiofrequência para flacidez**, com novas perguntas frequentes (dor, preparo, cuidados depois)
+- Removidos, a pedido dela: os recursos da fisioterapia pélvica e da incontinência, o parágrafo sobre o treinamento muscular como primeira opção, a observação sobre contraindicações do laser e os pedidos de perguntas reais das pacientes
+- Ortografia e gramática revisadas (acentuação, crase, pontuação)
+
 ---
 
 ## [1.11.2] - 2026-10-15
