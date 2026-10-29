@@ -5,6 +5,39 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.12.1] - a publicar
+### Revisão visual
+Ajustes de acabamento com base nos princípios de design da Apple (tipografia, contraste, resposta ao toque, simplicidade). Só `css/styles.css` mudou; nenhum texto, link ou evento foi alterado.
+
+**Leitura e contraste**
+- Textos pequenos aumentados: descrições dos cards de 13 px para 14,5 px; textos de apoio, contato e jornada para 15 px
+- Cinza dos textos secundários escurecido (`#9c908e` → `#7d706d`) e verde dos rótulos (`#6a7a66` → `#5e6c5a`): os anteriores não atingiam o contraste mínimo (WCAG AA, 4,5:1)
+- Novo tom `--rosa-ink` (`#b3596c`) para botões e textos pequenos em rosa; o rosa original fica para ícones, números e títulos grandes
+- Títulos sem palavra sozinha na última linha (`text-wrap: balance`) e parágrafos com quebra mais equilibrada
+- Rótulos do formulário em letra normal, maiores e mais escuros; campos com 16 px, o que evita o zoom automático do iPhone
+- Rodapé com textos mais legíveis
+
+**Simplicidade**
+- Removido o ícone de "check" repetido nos 9 cards de serviço: era igual em todos e não informava nada
+- Cards que não são clicáveis não "sobem" mais ao passar o mouse; o efeito fica só para os que são links
+- Diferenciais sem moldura; no celular viram uma lista compacta, com ícone à esquerda
+- Página inicial no celular 13% mais curta (menos espaço vazio entre seções)
+
+**Resposta ao toque e movimento**
+- Botões reagem no momento do toque (leve redução de tamanho)
+- Menu do celular desliza pela direita ao abrir e volta pela direita ao fechar
+- Botão flutuante do WhatsApp pulsa 3 vezes ao abrir a página e para, em vez de pulsar sem parar
+- Botões de ação ocupam a largura toda no celular
+
+**Acessibilidade**
+- Quem configura o aparelho para reduzir movimento: menu e botões sem animação
+- Quem pede menos transparência ou mais contraste: cabeçalho sólido e bordas mais marcadas
+
+### Limpeza
+- Removido o HTML dos ícones de "check" dos cards de serviço (página inicial e cards de "Outros atendimentos"), que estava oculto pelo CSS desde esta revisão
+
+---
+
 ## [1.12.0] - 2026-10-29
 ### Páginas de serviço
 Nove páginas novas, uma para cada serviço da página inicial, cada uma voltada a uma busca específica no Google:
