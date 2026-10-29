@@ -5,7 +5,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
-## [1.11.3] - a publicar
+## [1.12.1] - a publicar
 ### Revisão visual
 Ajustes de acabamento com base nos princípios de design da Apple (tipografia, contraste, resposta ao toque, simplicidade). Só `css/styles.css` mudou; nenhum texto, link ou evento foi alterado.
 
@@ -33,8 +33,32 @@ Ajustes de acabamento com base nos princípios de design da Apple (tipografia, c
 - Quem configura o aparelho para reduzir movimento: menu e botões sem animação
 - Quem pede menos transparência ou mais contraste: cabeçalho sólido e bordas mais marcadas
 
-### Pendente
-- O HTML dos ícones removidos ainda está no `index.html` (oculto pelo CSS). Limpar junto com a publicação das páginas de serviço, para não gerar conflito com o pull request #2
+### Limpeza
+- Removido o HTML dos ícones de "check" dos cards de serviço (página inicial e cards de "Outros atendimentos"), que estava oculto pelo CSS desde esta revisão
+
+---
+
+## [1.12.0] - 2026-10-29
+### Páginas de serviço
+Nove páginas novas, uma para cada serviço da página inicial, cada uma voltada a uma busca específica no Google:
+- `/fisioterapia-pelvica/`, `/incontinencia-urinaria/`, `/pos-parto/`, `/pos-cirurgico-estetico/`, `/drenagem-linfatica/` (06/10)
+- `/amamentacao/`, `/pos-cirurgico/` (ginecológico, obstétrico e de mama), `/laserterapia/`, `/estetica-intima/` (15/10)
+- Cada página tem título e descrição próprios, canonical, trilha de navegação (com dados estruturados `BreadcrumbList`), o que é, para quem é indicado, como é o atendimento, dúvidas frequentes, cartão da profissional com CREFITO, link para as avaliações no Google e botões de WhatsApp com origem própria no GA4 (`pagina_*_topo`, `_lateral`, `_final`)
+- Texto informativo e geral, sem promessa de resultado. **Revisão clínica da Simone é obrigatória antes do merge**
+- Na página inicial, os nove cards de serviço viraram links ("Saiba mais"); o rodapé de todas as páginas ganhou a coluna "Atendimentos"
+- `sitemap.xml` com as dez URLs
+
+### Pendências de conteúdo (`data-pendente`)
+- Pontos que dependem da Simone ficam em blocos marcados com `data-pendente`. Aparecem destacados **só no ambiente de teste** e ficam ocultos em produção, como rede de segurança
+- O texto oculto continua no código-fonte: antes de publicar, cada bloco deve ser substituído pelo texto definitivo ou removido
+
+### Revisão clínica da Simone (28/10/2026)
+- Textos das 9 páginas revisados pela Simone em documento compartilhado; todas as pendências respondidas ou retiradas. Nenhum bloco `data-pendente` restante
+- Respostas incorporadas: duração e frequência das sessões, pedido médico, convênio e reembolso, início no pós-parto e no pós-operatório, atendimento domiciliar, recursos usados no pós-operatório, frequência da drenagem, intervalo do laser
+- "Orientação em amamentação" passa a se chamar **Consultoria em amamentação** (página, card da página inicial e opção do formulário)
+- Estética íntima restrita a **radiofrequência para flacidez**, com novas perguntas frequentes (dor, preparo, cuidados depois)
+- Removidos, a pedido dela: os recursos da fisioterapia pélvica e da incontinência, o parágrafo sobre o treinamento muscular como primeira opção, a observação sobre contraindicações do laser e os pedidos de perguntas reais das pacientes
+- Ortografia e gramática revisadas (acentuação, crase, pontuação)
 
 ---
 
