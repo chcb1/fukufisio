@@ -5,6 +5,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ---
 
+## [1.12.2] - 2026-11-26
+### Seção de avaliações: texto mais acolhedor
+- Texto de apoio: "As avaliações são escritas pelas próprias pacientes…" soava defensivo. Passa a ser "A confiança de quem já passou por aqui é o que mais nos orgulha. Conheça as experiências compartilhadas no Google."
+- Botões: "Ler avaliações no Google" → **Ver avaliações**; "Já é paciente? Deixe a sua" → **Deixe sua avaliação** (só na página inicial)
+- Aplicado na página inicial e nas 9 páginas de serviço. Links e evento `clique_avaliacoes` sem mudança
+
+---
+
 ## [1.12.0] - 2026-10-29
 ### Páginas de serviço
 Nove páginas novas, uma para cada serviço da página inicial, cada uma voltada a uma busca específica no Google:
